@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { deletePlayground } from '../api/playgroundData';
 
 function PlaygroundCard({ playgroundObj, onUpdate }) {
+  console.warn(playgroundObj);
   const deleteThisPlayground = () => {
     if (window.confirm(`Delete ${playgroundObj.name}?`)) {
       deletePlayground(playgroundObj.firebaseKey).then(() => onUpdate());
