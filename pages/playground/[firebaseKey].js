@@ -21,15 +21,16 @@ export default function ViewPlayground() {
         <img src={playgroundDetails.image} alt={playgroundDetails.name} style={{ width: '300px' }} />
       </div>
       <div className="text-white ms-5 details">
-        <h5>
-          {playgroundDetails.name} in the {playgroundDetails.neighborhoodObject?.name} neighborhood
-          {playgroundDetails.neighborhoodObject?.favorite ? ' 🤍 favorite neighborhood' : ''}
-        </h5>
+        <h3>
+          {playgroundDetails.name}
+        </h3>
+        <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
+        {playgroundDetails.neighborhoodObject?.favorite ? ' 🤍 favorite neighborhood' : ''}
         {/* <p>{playgroundDetails.description || ''}</p> */}
         <p>
           Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
-          Hot Tip: {playgroundDetails.hot_tip}
         </p>
+        <p>Hot Tip: {playgroundDetails.hot_tip}</p>
         <h6>Features:</h6>
         <ul>
           <li>{playgroundDetails.indoor ? 'Indoor' : ''}</li>
@@ -42,10 +43,8 @@ export default function ViewPlayground() {
           <li>{playgroundDetails.comm_center ? 'Next to a community center' : ''}</li>
         </ul>
         <hr />
-        <p>
-          {playgroundDetails.visited ? ' ✅ visited' : ''}
-          {playgroundDetails.favorite ? '🤍 favorite' : ''}
-        </p>
+        <p>{playgroundDetails.visited ? ' ✅ i\'ve been here!' : ''}</p>
+        <p>{playgroundDetails.favorite ? '🤍 favorite' : ''}</p>
       </div>
     </div>
   );
