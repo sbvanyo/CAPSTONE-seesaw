@@ -22,7 +22,7 @@ function Neighborhoods() {
 
   return (
     <div className="text-center my-4">
-      <h1>Neighborhoods</h1>
+      <h1>neighborhoods</h1>
       {/* <Link href="/book/new" passHref>
         <Button>Add A Book</Button>
       </Link> */}
