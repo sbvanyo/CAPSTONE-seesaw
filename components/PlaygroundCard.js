@@ -17,7 +17,7 @@ function PlaygroundCard({ playgroundObj, onUpdate }) {
       <Card.Img variant="top" src={playgroundObj.image} alt={playgroundObj.name} style={{ height: '400px' }} />
       <Card.Body>
         <Card.Title>{playgroundObj.name}</Card.Title>
-        <p className="card-text bold">{playgroundObj.visited && <span>Visited<br /></span> }</p>
+        <p className="card-text bold">{playgroundObj.visited && <span>✅ i&apos;ve been here!<br /></span> }</p>
         {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
         <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
