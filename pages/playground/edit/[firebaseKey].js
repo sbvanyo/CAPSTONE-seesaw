@@ -14,6 +14,6 @@ export default function EditPlayground() {
   }, [firebaseKey]);
 
   return (
-    <PlaygroundForm obj={editItem} />
+    <PlaygroundForm playgroundObj={editItem} />
   );
 }

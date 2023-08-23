@@ -83,7 +83,7 @@ function PlaygroundForm({ playgroundObj }) {
       {/* IMAGE INPUT  */}
       <FloatingLabel controlId="floatingInput2" label="Playground Image" className="mb-3">
         <Form.Control
-          type="file"
+          type="url"
           placeholder="Upload an image"
           name="image"
           value={formInput.image}
