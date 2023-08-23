@@ -19,7 +19,7 @@ export default function NavBarAuth() {
             {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
             {/* <Button variant="primary">add a playground</Button> */}
             <Link passHref href="/playground/new">
-              <Nav.Link>add a playground</Nav.Link>
+              <Button>add a playground</Button>
             </Link>
             <Link passHref href="/">
               <Nav.Link>home</Nav.Link>

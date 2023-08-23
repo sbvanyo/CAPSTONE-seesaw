@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { getNeighborhoods } from '../../api/neighborhoodData';
 import NeighborhoodCard from '../../components/NeighborhoodCard';
@@ -23,9 +25,9 @@ function Neighborhoods() {
   return (
     <div className="text-center my-4">
       <h1>neighborhoods</h1>
-      {/* <Link href="/book/new" passHref>
-        <Button>Add A Book</Button>
-      </Link> */}
+      <Link passHref href="/neighborhood/new">
+        <Button>add a neighborhood</Button>
+      </Link>
       <div className="d-flex flex-wrap">
         {/* map over neighborhoods here using NeighborhoodCard component */}
         {neighborhoods.map((neighborhood) => (

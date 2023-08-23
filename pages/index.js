@@ -1,6 +1,4 @@
-import { Button } from 'react-bootstrap'; // TODO: COMMENT IN FOR AUTH
 // import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getPlaygrounds } from '../api/playgroundData';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
@@ -26,9 +24,6 @@ function Home() {
 
       <h1>Hello {user.displayName}! </h1>
 
-      <Link href="/playground/new" passHref>
-        <Button>Add A Playground</Button>
-      </Link>
       <div className="d-flex flex-wrap">
         {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}
         {playgrounds.map((playground) => (
