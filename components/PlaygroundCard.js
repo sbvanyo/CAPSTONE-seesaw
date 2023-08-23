@@ -52,6 +52,7 @@ PlaygroundCard.propTypes = {
     neighborhood_id: PropTypes.string,
     paved_trail: PropTypes.bool,
     pavilion: PropTypes.bool,
+    sandbox: PropTypes.bool,
     state: PropTypes.string,
     uid: PropTypes.string,
     visited: PropTypes.bool,
