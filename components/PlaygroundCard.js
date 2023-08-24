@@ -18,6 +18,7 @@ function PlaygroundCard({ playgroundObj, onUpdate }) {
       <Card.Body>
         <Card.Title>{playgroundObj.name}</Card.Title>
         <p className="card-text bold">{playgroundObj.visited && <span>✅ i&apos;ve been here!<br /></span> }</p>
+        <p>{playgroundObj.favorite ? '💛 i love this playground' : ''}</p>
         {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
         <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>

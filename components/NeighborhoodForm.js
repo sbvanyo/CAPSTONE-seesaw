@@ -53,10 +53,10 @@ function NeighborhoodForm({ neighborhoodObj }) {
       <h2 className="text-white mt-5">{neighborhoodObj.firebaseKey ? 'update' : 'create'} neighborhood</h2>
 
       {/* NAME INPUT  */}
-      <FloatingLabel controlId="floatingInput1" label="Neighborhood Name" className="mb-3">
+      <FloatingLabel controlId="floatingInput1" label="neighborhood name" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter neighborhood name"
+          placeholder="enter neighborhood name"
           name="name"
           value={formInput.name}
           onChange={handleChange}
@@ -65,10 +65,10 @@ function NeighborhoodForm({ neighborhoodObj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="Neighborhood Image" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="neighborhood image" className="mb-3">
         <Form.Control
           type="url"
-          placeholder="Enter an image url"
+          placeholder="enter an image url"
           name="image"
           value={formInput.image}
           onChange={handleChange}
@@ -76,7 +76,7 @@ function NeighborhoodForm({ neighborhoodObj }) {
         />
       </FloatingLabel>
 
-      {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
+      {/* FAVORITE TOGGLE  */}
       <Form.Check
         className="text-white mb-3"
         type="switch"
