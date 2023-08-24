@@ -67,12 +67,13 @@ function PlaygroundForm({ playgroundObj }) {
   return (
     <Form onSubmit={handleSubmit}>
       <h2 className="text-white mt-5">{playgroundObj.firebaseKey ? 'update' : 'create'} playground</h2>
+      <hr />
 
       {/* NAME INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="playground name" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter playground name"
+          placeholder="enter playground name"
           name="name"
           value={formInput.name}
           onChange={handleChange}
@@ -81,10 +82,10 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput2" label="Playground Image" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="playground image url" className="mb-3">
         <Form.Control
           type="url"
-          placeholder="Upload an image"
+          placeholder="upload an image"
           name="image"
           value={formInput.image}
           onChange={handleChange}
@@ -93,10 +94,10 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* STREET ADDRESS INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="Street Address" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="street address" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter street address"
+          placeholder="enter street address"
           name="address"
           value={formInput.address}
           onChange={handleChange}
@@ -105,10 +106,10 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* CITY INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="City" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="city" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter city"
+          placeholder="enter city"
           name="city"
           value={formInput.city}
           onChange={handleChange}
@@ -117,10 +118,10 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* STATE INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="State" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="state" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter state"
+          placeholder="enter state"
           name="state"
           value={formInput.state}
           onChange={handleChange}
@@ -129,10 +130,10 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* ZIP CODE INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="Zip Code" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="zip code" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter zip code"
+          placeholder="enter zip code"
           name="zip"
           value={formInput.zip}
           onChange={handleChange}
@@ -141,16 +142,16 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* NEIGHBORHOOD SELECT  */}
-      <FloatingLabel controlId="floatingSelect" label="Neighborhood">
+      <FloatingLabel controlId="floatingSelect" label="neighborhood">
         <Form.Select
-          aria-label="Neighborhood"
+          aria-label="neighborhood"
           name="neighborhood_id"
           onChange={handleChange}
           className="mb-3"
           value={formInput.neighborhood_id}
           required
         >
-          <option value="">Select a Neighborhood</option>
+          <option value="">select a neighborhood</option>
           {
             neighborhoods.map((neighborhood) => (
               <option
@@ -165,10 +166,10 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* HOT TIP TEXTAREA  */}
-      <FloatingLabel controlId="floatingTextarea" label="Hot Tip" className="mb-3">
+      <FloatingLabel controlId="floatingTextarea" label="HOT TIP (what to know before you go...)" className="mb-3">
         <Form.Control
           as="textarea"
-          placeholder="Hot Tip"
+          placeholder="HOT TIP"
           style={{ height: '100px' }}
           name="hot_tip"
           value={formInput.hot_tip}
@@ -177,7 +178,114 @@ function PlaygroundForm({ playgroundObj }) {
         />
       </FloatingLabel>
 
-      {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
+      {/* FEATURES CHECKBOXES */}
+      <h5>FEATURES</h5>
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="paved_trail"
+        name="paved_trail"
+        label="paved trail"
+        checked={formInput.paved_trail}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            paved_trail: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="hiking"
+        name="hiking"
+        label="hiking"
+        checked={formInput.hiking}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            hiking: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="pavilion"
+        name="pavilion"
+        label="picnic pavilion"
+        checked={formInput.pavilion}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            pavilion: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="water"
+        name="water"
+        label="water play"
+        checked={formInput.water}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            water: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="sandbox"
+        name="sandbox"
+        label="sandbox"
+        checked={formInput.sandbox}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            sandbox: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="library"
+        name="library"
+        label="next to a library"
+        checked={formInput.library}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            library: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="checkbox"
+        id="comm_center"
+        name="comm_center"
+        label="next to a community center"
+        checked={formInput.comm_center}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            comm_center: e.target.checked,
+          }));
+        }}
+      />
+
+      {/* VISITED + FAVORITE TOGGLES */}
       <Form.Check
         className="text-white mb-3"
         type="switch"

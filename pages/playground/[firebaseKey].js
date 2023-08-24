@@ -21,16 +21,17 @@ export default function ViewPlayground() {
         <img src={playgroundDetails.image} alt={playgroundDetails.name} style={{ width: '300px' }} />
       </div>
       <div className="text-white ms-5 details">
-        <h3>
-          {playgroundDetails.name}
-        </h3>
+        <h3>{playgroundDetails.name}</h3>
         <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
-        {playgroundDetails.neighborhoodObject?.favorite ? ' 🤍 i love this neighborhood' : ''}
-        {/* <p>{playgroundDetails.description || ''}</p> */}
+        <p>
+          {playgroundDetails.visited ? ' ✅ i\'ve been here! ' : ' '}
+          {playgroundDetails.favorite ? '💛 i love this playground' : ''}
+        </p>
+        <hr />
         <p>
           Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
         </p>
-        <p>Hot Tip: {playgroundDetails.hot_tip}</p>
+        <p>HOT TIP: {playgroundDetails.hot_tip}</p>
         <h6>Features:</h6>
         <ul>
           <li>{playgroundDetails.hiking ? '✅ Hiking' : '❌ Hiking'}</li>
@@ -43,8 +44,6 @@ export default function ViewPlayground() {
           <li>{playgroundDetails.indoor ? '✅ Indoor' : '❌ Indoor'}</li>
         </ul>
         <hr />
-        <p>{playgroundDetails.visited ? ' ✅ i\'ve been here!' : ''}</p>
-        <p>{playgroundDetails.favorite ? '🤍 favorite' : ''}</p>
       </div>
     </div>
   );
