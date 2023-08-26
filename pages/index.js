@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getPlaygrounds } from '../api/playgroundData';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
 import PlaygroundCard from '../components/PlaygroundCard';
+import SearchBar from '../components/SearchBar';
 
 function Home() {
   // Set a state for playgrounds
@@ -19,10 +20,21 @@ function Home() {
     getAllThePlaygrounds();
   }, []);
 
+  const filterResult = (query) => {
+    if (!query) {
+      getAllThePlaygrounds();
+    } else {
+      const filter = playgrounds.filter((playground) => playground.name.toLowerCase().includes(query) || playground.address.toLowerCase().includes(query));
+      setPlaygrounds(filter);
+    }
+  };
+
   return (
     <div className="text-center my-4">
 
       <h1>Hello {user.displayName}! </h1>
+
+      <SearchBar onKeyUp={(query) => filterResult(query)} />
 
       <div className="d-flex flex-wrap">
         {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}
