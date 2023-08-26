@@ -8,7 +8,6 @@ import { deleteSingleNeighborhood } from '../api/neighborhoodData';
 import { deleteNeighborhoodPlaygrounds } from '../api/mergedData';
 
 function NeighborhoodCard({ neighborhoodObj, onUpdate }) {
-  console.warn(neighborhoodObj);
   const deleteThisNeighborhood = () => {
     if (window.confirm(`Delete ${neighborhoodObj.name}?`)) {
       deleteSingleNeighborhood(neighborhoodObj.firebaseKey).then(deleteNeighborhoodPlaygrounds(neighborhoodObj.firebaseKey)).then(() => onUpdate());
