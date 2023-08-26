@@ -15,7 +15,7 @@ function Home() {
     getPlaygrounds(user.uid).then(setPlaygrounds);
   };
 
-  // Make API call to get all the books on component render
+  // Make API call to get all the playgrounds on component render
   useEffect(() => {
     getAllThePlaygrounds();
   }, []);
