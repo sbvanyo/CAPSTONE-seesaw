@@ -9,7 +9,7 @@ export default function SearchBar({ onKeyUp }) {
 
   return (
     <Form id="search">
-      <FloatingLabel controlId="search" label="search" className="mb-3">
+      <FloatingLabel controlId="search" label="search playgrounds..." className="mb-3">
         <Form.Control
           type="text"
           placeholder="search..."

@@ -24,7 +24,10 @@ function Home() {
     if (!query) {
       getAllThePlaygrounds();
     } else {
-      const filter = playgrounds.filter((playground) => playground.name.toLowerCase().includes(query) || playground.address.toLowerCase().includes(query));
+      const filter = playgrounds.filter((playground) => playground.name.toLowerCase().includes(query) || playground.address.toLowerCase().includes(query) || playground.city.toLowerCase().includes(query) || playground.hot_tip.toLowerCase().includes(query) || playground.zip.toLowerCase().includes(query));
+
+      console.warn(filter);
+
       setPlaygrounds(filter);
     }
   };
