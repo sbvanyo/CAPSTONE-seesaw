@@ -18,5 +18,36 @@ a {
 }
 
 body {
-  background-color: rgb(197, 123, 123);
+  background-color: #FFCD29;
+}
+
+#cardContainer {
+  column-count: 4;
+  column-gap: 2vh;
+  margin: 2vh;
+}
+
+/* BUTTONS */
+.filterButton {
+  /* background-color: #5FB0F1; */
+  background-color: tomato;
+  border: none;
+  border-radius: 50%;
+  width: 12vh;
+  height: 12vh;
+  margin: 1vh;
+  padding: 1vh;
+}
+
+/* CARDS */
+.playgroundCard {
+  border-radius: 25px;
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+/* IMAGES */
+.playgroundImage {
+  border-radius: 25px;
+  padding: 5%;
 }

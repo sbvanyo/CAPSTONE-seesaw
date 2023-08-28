@@ -20,7 +20,7 @@ const viewNeighborhoodDetails = (neighborhoodFirebaseKey) => new Promise((resolv
 
 const deleteNeighborhoodPlaygrounds = (neighborhoodId) => new Promise((resolve, reject) => {
   getNeighborhoodPlaygrounds(neighborhoodId).then((playgroundsArray) => {
-    console.warn(playgroundsArray, 'Neighborhood Playgrounds');
+    // console.warn(playgroundsArray, 'Neighborhood Playgrounds');
     const deletePlaygroundPromises = playgroundsArray.map((playground) => deletePlayground(playground.firebaseKey));
 
     Promise.all(deletePlaygroundPromises).then(() => {

@@ -106,27 +106,11 @@ const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// const booksOnSale = (uid) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const onSale = Object.values(data).filter((item) => item.sale);
-//       resolve(onSale);
-//     })
-//     .catch(reject);
-// });
-
 export {
   getPlaygrounds,
   createPlayground,
   favoritePlaygrounds,
   visitedPlaygrounds,
-  // booksOnSale,
   deletePlayground,
   getSinglePlayground,
   updatePlayground,

@@ -1,4 +1,3 @@
-// import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
 import { useEffect, useState } from 'react';
 import { favoritePlaygrounds } from '../api/playgroundData';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
