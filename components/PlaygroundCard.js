@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { deletePlayground } from '../api/playgroundData';
 
 function PlaygroundCard({ playgroundObj, onUpdate }) {
-  console.warn(playgroundObj);
+  // console.warn(playgroundObj);
   const deleteThisPlayground = () => {
     if (window.confirm(`Delete ${playgroundObj.name}?`)) {
       deletePlayground(playgroundObj.firebaseKey).then(() => onUpdate());
@@ -60,7 +60,11 @@ PlaygroundCard.propTypes = {
     water: PropTypes.bool,
     zip: PropTypes.string,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func,
 };
 
 export default PlaygroundCard;
+
+PlaygroundCard.defaultProps = {
+  onUpdate: PropTypes.func,
+};

@@ -18,5 +18,14 @@ a {
 }
 
 body {
-  background-color: rgb(197, 123, 123);
+  background-color: #FFCD29;
+}
+
+/* BUTTONS */
+.filterButton {
+  background-color: #5FB0F1;
+  border: none;
+  border-radius: 50%;
+  width: 13vh;
+  height: 13vh;
 }

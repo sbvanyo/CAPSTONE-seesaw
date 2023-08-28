@@ -22,7 +22,7 @@ export default function ViewNeighborhood() {
     getNeighborhoodPlaygrounds(firebaseKey).then(setNeighborhoodPlaygrounds);
   }, [firebaseKey]);
 
-  console.warn(neighborhoodPlaygrounds);
+  // console.warn(neighborhoodPlaygrounds);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
