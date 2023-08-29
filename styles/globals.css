@@ -21,12 +21,11 @@ a {
 body {
   background-color: #FFCD29;
 }
-
-.cardContainer {
-  column-count: 4;
-  column-gap: 2vh;
-  margin: 2vh;
+nav {
+  background-color: tomato;
 }
+
+
 
 /* TEXT */
 #logo {
@@ -40,10 +39,15 @@ body {
   font-weight: 600;
   font-size: x-large;
 }
+#title {
+  font-weight: 700;
+  font-size: 110px;
+}
 
 .cardTitle {
   font-weight: 700;
 }
+
 
 /* BUTTONS */
 .filterButton {
@@ -57,7 +61,13 @@ body {
   padding: 1vh;
 }
 
+
 /* CARDS */
+.cardContainer {
+  column-count: 4;
+  column-gap: 2vh;
+  margin: 2vh;
+}
 .playgroundCard {
   border-radius: 25px;
   break-inside: avoid;
@@ -68,4 +78,16 @@ body {
 .playgroundImage {
   border-radius: 25px;
   padding: 5%;
+}
+
+
+/* FORMS */
+#searchContainer {
+  display: flex;
+  justify-content: center;
+}
+#search {
+  min-width: 50%;
+  max-width: 100%;
+  padding: 3%;
 }
