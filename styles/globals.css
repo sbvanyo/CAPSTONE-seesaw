@@ -1,11 +1,11 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Quicksand:wght@400;600;700&display=swap');
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 a {
@@ -21,10 +21,18 @@ body {
   background-color: #FFCD29;
 }
 
-#cardContainer {
+.cardContainer {
   column-count: 4;
   column-gap: 2vh;
   margin: 2vh;
+}
+
+/* TEXT */
+#logo {
+  font-family: 'Borel', cursive;
+  font-size: 6vh;
+  margin-top: 3vh;
+  margin-right: 5vh;
 }
 
 /* BUTTONS */

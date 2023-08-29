@@ -190,11 +190,12 @@ function Home() {
       <Button onClick={toggleWaterFilter} className="filterButton" style={{ backgroundColor: activeFilter === 'water' ? '#5FB0F1' : 'tomato' }}>
         water play
         {showWaterFilter && <FilterWater setPlaygrounds={setPlaygrounds} />}
+
       </Button>
-      <div id="cardContainer">
+      <div className="cardContainer">
         {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}
         {playgrounds.map((playground) => (
-          <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} />
+          <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getAllThePlaygrounds} />
         ))}
       </div>
       {/* </div> */}

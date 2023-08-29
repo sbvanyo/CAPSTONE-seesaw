@@ -23,9 +23,11 @@ function Visited() {
     <div className="text-center my-4">
       <div className="d-flex flex-wrap">
         {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}
-        {playgrounds.map((playground) => (
-          <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getVisitedPlaygrounds} />
-        ))}
+        <div className="cardContainer">
+          {playgrounds.map((playground) => (
+            <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getVisitedPlaygrounds} />
+          ))}
+        </div>
       </div>
     </div>
   );
