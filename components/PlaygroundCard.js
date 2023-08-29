@@ -2,34 +2,22 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { deletePlayground } from '../api/playgroundData';
+// import { deletePlayground } from '../api/playgroundData';
 
-function PlaygroundCard({ playgroundObj, onUpdate }) {
+function PlaygroundCard({ playgroundObj }) {
   // console.warn(playgroundObj);
-  const deleteThisPlayground = () => {
-    if (window.confirm(`Delete ${playgroundObj.name}?`)) {
-      deletePlayground(playgroundObj.firebaseKey).then(() => onUpdate());
-    }
-  };
 
   return (
     <Card className="playgroundCard">
       <Card.Img variant="top" src={playgroundObj.image} alt={playgroundObj.name} className="playgroundImage" />
       <Card.Body>
-        <Card.Title>{playgroundObj.name}</Card.Title>
+        <Card.Title className="cardTitle">{playgroundObj.name}</Card.Title>
         <p className="card-text bold">{playgroundObj.visited && <span>✅ i&apos;ve been here!<br /></span> }</p>
         <p>{playgroundObj.favorite ? '💛 i love this playground' : ''}</p>
         {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
         <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
-        {/* DYNAMIC LINK TO EDIT THE playground DETAILS  */}
-        <Link href={`/playground/edit/${playgroundObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisPlayground} className="m-2">
-          DELETE
-        </Button>
       </Card.Body>
     </Card>
   );
@@ -60,11 +48,11 @@ PlaygroundCard.propTypes = {
     water: PropTypes.bool,
     zip: PropTypes.string,
   }).isRequired,
-  onUpdate: PropTypes.func,
+  // onUpdate: PropTypes.func,
 };
 
 export default PlaygroundCard;
 
-PlaygroundCard.defaultProps = {
-  onUpdate: PropTypes.func,
-};
+// PlaygroundCard.defaultProps = {
+//   onUpdate: PropTypes.func,
+// };
