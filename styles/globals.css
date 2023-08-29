@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
-@import url('https://fonts.googleapis.com/css2?family=Borel&family=Quicksand:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=DM+Serif+Text&family=Quicksand:wght@400;600;700&display=swap');
+
 
 html,
 body {
@@ -33,6 +34,15 @@ body {
   font-size: 6vh;
   margin-top: 3vh;
   margin-right: 5vh;
+}
+
+#hello {
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.cardTitle {
+  font-weight: 700;
 }
 
 /* BUTTONS */

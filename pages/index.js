@@ -147,7 +147,7 @@ function Home() {
   return (
     <div className="text-center my-4">
 
-      <h1>Hello {user.displayName}! </h1>
+      <h1 id="hello">Hello {user.displayName}! </h1>
 
       <SearchBar onKeyUp={(query) => filterResult(query)} />
 
