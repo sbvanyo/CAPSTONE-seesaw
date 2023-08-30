@@ -144,25 +144,32 @@ nav {
 }
 
 .neighborhoodCard {
-  width: auto;
-  height: 60px;
+  width: 50rem;
+  height: auto;
   margin-top: 2px;
+}
+#neighborhoodCardList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
 }
 #neighborhoodBody {
   text-align: start;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 #neighborhoodContainer {
   /* margin-left: 5vh; */
   text-align: center;
   align-self: center;
 }
-/* #neighborhoodCardList {
+#neighborhoodBtnGroup {
+  display: flex;
   align-items: center;
-  align-self: center;
-} */
+}
 #userCard {
   min-width: 18rem;
   height: fit-content;

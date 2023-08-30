@@ -195,7 +195,7 @@ function Home() {
 
       </Button>
       <div className="cardContainer">
-        {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}
+        {/* Map over playgrounds array and return a PlaygroundCard for every item mapped over */}
         {playgrounds.map((playground) => (
           <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getAllThePlaygrounds} />
         ))}

@@ -19,19 +19,21 @@ function NeighborhoodCard({ neighborhoodObj, onUpdate }) {
       {/* <Card.Img variant="top" src={neighborhoodObj.image} alt={neighborhoodObj.name} style={{ height: '400px' }} /> */}
       <Card.Body>
         <div id="neighborhoodBody">
-          <Card.Title>{neighborhoodObj.name}</Card.Title>
+          <Card.Title className="cardTitle">{neighborhoodObj.name}</Card.Title>
           <p className="card-text bold">{neighborhoodObj.favorite && <span>💛 i love this neighborhood<br /></span> }</p>
-          {/* DYNAMIC LINK TO VIEW THE NEIGHBORHOOD DETAILS  */}
-          <Link href={`/neighborhood/${neighborhoodObj.firebaseKey}`} passHref>
-            <Button variant="primary" className="m-2">VIEW</Button>
-          </Link>
-          {/* DYNAMIC LINK TO EDIT THE NEIGHBORHOOD DETAILS  */}
-          <Link href={`/neighborhood/edit/${neighborhoodObj.firebaseKey}`} passHref>
-            <Button variant="info">EDIT</Button>
-          </Link>
-          <Button variant="danger" onClick={deleteThisNeighborhood} className="m-2">
-            DELETE
-          </Button>
+          <div id="neighborhoodBtnGroup">
+            {/* DYNAMIC LINK TO VIEW THE NEIGHBORHOOD DETAILS  */}
+            <Link href={`/neighborhood/${neighborhoodObj.firebaseKey}`} passHref>
+              <Button variant="primary" className="m-2">VIEW</Button>
+            </Link>
+            {/* DYNAMIC LINK TO EDIT THE NEIGHBORHOOD DETAILS  */}
+            <Link href={`/neighborhood/edit/${neighborhoodObj.firebaseKey}`} passHref>
+              <Button variant="info">EDIT</Button>
+            </Link>
+            <Button variant="danger" onClick={deleteThisNeighborhood} className="m-2">
+              DELETE
+            </Button>
+          </div>
         </div>
       </Card.Body>
     </Card>
