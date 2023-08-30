@@ -1,5 +1,6 @@
 // import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
-import { useEffect, useState } from 'react';
+
+import { React, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { getPlaygrounds } from '../api/playgroundData';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
@@ -148,7 +149,7 @@ function Home() {
     <div className="text-center my-4">
 
       <h4 id="hello">hi {user.displayName}! </h4>
-      <h1 id="title">find a playground</h1>
+      <h1 className="title">find a playground</h1>
       <div id="searchContainer">
         <SearchBar onKeyUp={(query) => filterResult(query)} />
       </div>

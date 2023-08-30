@@ -16,9 +16,9 @@ function NeighborhoodCard({ neighborhoodObj, onUpdate }) {
 
   return (
     <Card className="neighborhoodCard">
-      {/* <Card.Img variant="top" src={neighborhoodObj.image} alt={neighborhoodObj.name} style={{ height: '400px' }} /> */}
       <Card.Body>
         <div id="neighborhoodBody">
+          {/* <Card.Img variant="top" src={neighborhoodObj.image} style={{ height: '50px', width: 'auto' }} /> */}
           <Card.Title className="cardTitle">{neighborhoodObj.name}</Card.Title>
           <p className="card-text bold">{neighborhoodObj.favorite && <span>💛 i love this neighborhood<br /></span> }</p>
           <div id="neighborhoodBtnGroup">

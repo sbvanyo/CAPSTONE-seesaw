@@ -93,7 +93,7 @@ function NeighborhoodForm({ neighborhoodObj }) {
       />
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{neighborhoodObj.firebaseKey ? 'update' : 'create'} neighborhood</Button>
+      <Button type="submit" className="submitBtn">{neighborhoodObj.firebaseKey ? 'update' : 'create'} neighborhood</Button>
     </Form>
   );
 }

@@ -142,7 +142,7 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* NEIGHBORHOOD SELECT  */}
-      <FloatingLabel controlId="floatingSelect" label="neighborhood">
+      <FloatingLabel controlId="floatingSelect" label="neighborhood" className="mb-3">
         <Form.Select
           aria-label="neighborhood"
           name="neighborhood_id"
@@ -178,112 +178,118 @@ function PlaygroundForm({ playgroundObj }) {
         />
       </FloatingLabel>
 
+      <br />
+
       {/* FEATURES CHECKBOXES */}
-      <h5>FEATURES</h5>
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="paved_trail"
-        name="paved_trail"
-        label="paved trail"
-        checked={formInput.paved_trail}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            paved_trail: e.target.checked,
-          }));
-        }}
-      />
+      <h5 id="featuresTitle">FEATURES</h5>
+      <div id="checkboxGroup">
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="paved_trail"
+          name="paved_trail"
+          label="paved trail"
+          checked={formInput.paved_trail}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              paved_trail: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="hiking"
-        name="hiking"
-        label="hiking"
-        checked={formInput.hiking}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            hiking: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="hiking"
+          name="hiking"
+          label="hiking"
+          checked={formInput.hiking}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              hiking: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="pavilion"
-        name="pavilion"
-        label="picnic pavilion"
-        checked={formInput.pavilion}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            pavilion: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="pavilion"
+          name="pavilion"
+          label="picnic pavilion"
+          checked={formInput.pavilion}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              pavilion: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="water"
-        name="water"
-        label="water play"
-        checked={formInput.water}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            water: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="water"
+          name="water"
+          label="water play"
+          checked={formInput.water}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              water: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="sandbox"
-        name="sandbox"
-        label="sandbox"
-        checked={formInput.sandbox}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            sandbox: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="sandbox"
+          name="sandbox"
+          label="sandbox"
+          checked={formInput.sandbox}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              sandbox: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="library"
-        name="library"
-        label="next to a library"
-        checked={formInput.library}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            library: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="library"
+          name="library"
+          label="next to a library"
+          checked={formInput.library}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              library: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="checkbox"
-        id="comm_center"
-        name="comm_center"
-        label="next to a community center"
-        checked={formInput.comm_center}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            comm_center: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="comm_center"
+          name="comm_center"
+          label="next to a community center"
+          checked={formInput.comm_center}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              comm_center: e.target.checked,
+            }));
+          }}
+        />
+      </div>
+
+      <br />
 
       {/* VISITED + FAVORITE TOGGLES */}
       <Form.Check
@@ -317,7 +323,7 @@ function PlaygroundForm({ playgroundObj }) {
       />
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{playgroundObj.firebaseKey ? 'update' : 'create'} playground</Button>
+      <Button type="submit" className="submitBtn">{playgroundObj.firebaseKey ? 'update' : 'create'} playground</Button>
     </Form>
   );
 }
