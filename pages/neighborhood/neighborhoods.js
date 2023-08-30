@@ -23,18 +23,17 @@ function Neighborhoods() {
   });
 
   return (
-    <div className="text-center my-4">
+    <div id="neighborhoodContainer">
       <h1>neighborhoods</h1>
       <Link passHref href="/neighborhood/new">
         <Button>add a neighborhood</Button>
       </Link>
-      <div className="d-flex flex-wrap">
+      <div id="neighborhoodCardList">
         {/* map over neighborhoods here using NeighborhoodCard component */}
         {neighborhoods.map((neighborhood) => (
           <NeighborhoodCard key={neighborhood.firebaseKey} neighborhoodObj={neighborhood} onUpdate={getAllTheNeighborhoods} />
         ))}
       </div>
-
     </div>
   );
 }

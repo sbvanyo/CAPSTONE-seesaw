@@ -15,22 +15,24 @@ function NeighborhoodCard({ neighborhoodObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={neighborhoodObj.image} alt={neighborhoodObj.name} style={{ height: '400px' }} />
+    <Card className="neighborhoodCard">
+      {/* <Card.Img variant="top" src={neighborhoodObj.image} alt={neighborhoodObj.name} style={{ height: '400px' }} /> */}
       <Card.Body>
-        <Card.Title>{neighborhoodObj.name}</Card.Title>
-        <p className="card-text bold">{neighborhoodObj.favorite && <span>💛 i love this neighborhood<br /></span> }</p>
-        {/* DYNAMIC LINK TO VIEW THE NEIGHBORHOOD DETAILS  */}
-        <Link href={`/neighborhood/${neighborhoodObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
-        </Link>
-        {/* DYNAMIC LINK TO EDIT THE NEIGHBORHOOD DETAILS  */}
-        <Link href={`/neighborhood/edit/${neighborhoodObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisNeighborhood} className="m-2">
-          DELETE
-        </Button>
+        <div id="neighborhoodBody">
+          <Card.Title>{neighborhoodObj.name}</Card.Title>
+          <p className="card-text bold">{neighborhoodObj.favorite && <span>💛 i love this neighborhood<br /></span> }</p>
+          {/* DYNAMIC LINK TO VIEW THE NEIGHBORHOOD DETAILS  */}
+          <Link href={`/neighborhood/${neighborhoodObj.firebaseKey}`} passHref>
+            <Button variant="primary" className="m-2">VIEW</Button>
+          </Link>
+          {/* DYNAMIC LINK TO EDIT THE NEIGHBORHOOD DETAILS  */}
+          <Link href={`/neighborhood/edit/${neighborhoodObj.firebaseKey}`} passHref>
+            <Button variant="info">EDIT</Button>
+          </Link>
+          <Button variant="danger" onClick={deleteThisNeighborhood} className="m-2">
+            DELETE
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
