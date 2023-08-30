@@ -6,6 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  padding-left: 11%;
   font-family: 'Quicksand', sans-serif;
 }
 
@@ -21,8 +22,41 @@ a {
 body {
   background-color: #FFCD29;
 }
+
+/* NAV STUFF */
 nav {
   background-color: tomato;
+}
+#navbar {
+  height: 100%;  
+  width: 20%;
+  min-width: 250px;
+  max-width: 300px;  
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0; 
+  transition: .5s ease; 
+  overflow-x: hidden; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+#navItemContainer {
+  top: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#navLinkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-link {
+  font-weight: bold;
+  font-size: x-large;
+  padding-top: 25px;
 }
 
 
@@ -31,10 +65,9 @@ nav {
 #logo {
   font-family: 'Borel', cursive;
   font-size: 6vh;
-  margin-top: 3vh;
-  margin-right: 5vh;
+  align-self: center;
+  padding: 30px 0 20px 0;
 }
-
 #hello {
   font-weight: 600;
   font-size: x-large;
@@ -50,15 +83,36 @@ nav {
 
 
 /* BUTTONS */
+
 .filterButton {
-  /* background-color: #5FB0F1; */
   background-color: tomato;
-  border: none;
+  border: white 2px solid;
   border-radius: 50%;
-  width: 12vh;
-  height: 12vh;
+  width: 13vh;
+  height: 13vh;
   margin: 1vh;
-  padding: 1vh;
+  padding: 14px;
+  transition: .5s ease; 
+}
+#viewBtn {
+  background-color: #5FB0F1;
+  border: none;
+}
+#addPlaygroundBtn {
+  background-color: #5FB0F1;
+  font-weight: 600;
+  border-radius: 50%;
+  border: white 8px solid;
+  height: 15vh;
+  width: 15vh;
+  padding-top: 30px;
+}
+#signOutBtn {
+  background-color: black;
+  border: none;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 2vh;
 }
 
 
@@ -90,4 +144,8 @@ nav {
   min-width: 50%;
   max-width: 100%;
   padding: 3%;
+}
+
+.nav-link {
+  padding-top: 3vh;
 }

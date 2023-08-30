@@ -16,10 +16,10 @@ function User({ userObj }) {
         <Card.Img variant="top" src={user.photoURL} alt={user.displayName} style={{ height: 'auto' }} />
         <Card.Body>
           <Card.Title>{user.displayName}</Card.Title>
-          <Card.Text>Email: {user.email}</Card.Text>
-          <Card.Text>Last Login: {user.metadata.lastSignInTime}</Card.Text>
-          <Button variant="danger" onClick={signOut} className="m-2">
-            SIGN OUT
+          <Card.Text>email: {user.email}</Card.Text>
+          <Card.Text>last login: {user.metadata.lastSignInTime}</Card.Text>
+          <Button variant="danger" onClick={signOut} className="m-2" id="signOutBtn">
+            sign out
           </Button>
         </Card.Body>
       </Card>

@@ -16,7 +16,7 @@ function PlaygroundCard({ playgroundObj }) {
         <p>{playgroundObj.favorite ? '💛 i love this playground' : ''}</p>
         {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
         <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button variant="primary" className="m-2" id="viewBtn">VIEW</Button>
         </Link>
       </Card.Body>
     </Card>
