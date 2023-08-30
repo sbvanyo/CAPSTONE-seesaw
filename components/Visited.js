@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { visitedPlaygrounds } from '../api/playgroundData';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
-import PlaygroundCard from './PlaygroundCard';
+// import PlaygroundCard from './PlaygroundCard';
 
 function Visited() {
   // Set a state for playgrounds
@@ -19,15 +19,22 @@ function Visited() {
     getVisitedPlaygrounds();
   }, []);
 
+  const visitedTotal = playgrounds.length;
+  console.warn(visitedTotal);
+
   return (
     <div className="text-center my-4">
+      <div id="visitedTotal">
+        <h2>you&apos;ve visited <strong>{visitedTotal}</strong> playgrounds!</h2>
+        <h5>look at you go!</h5>
+      </div>
       <div className="d-flex flex-wrap">
         {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}
-        <div className="cardContainer">
+        {/* <div className="cardContainer">
           {playgrounds.map((playground) => (
-            <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getVisitedPlaygrounds} />
+            <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getVisitedPlaygrounds} id="visitedList" />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

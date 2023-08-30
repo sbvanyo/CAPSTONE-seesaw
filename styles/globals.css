@@ -60,7 +60,6 @@ nav {
 }
 
 
-
 /* TEXT */
 #logo {
   font-family: 'Borel', cursive;
@@ -76,9 +75,21 @@ nav {
   font-weight: 700;
   font-size: 110px;
 }
-
 .cardTitle {
   font-weight: 700;
+}
+#visitedTotal {
+  margin: 10%;
+  margin-left: 20%;
+  padding: 10%;
+  background-color: #5FB0F1;
+  border: white 8px solid;
+  border-radius: 25px;
+  width: 35rem;
+}
+#loveArrayText {
+  text-align: center;
+  margin: 5vh;
 }
 
 
@@ -118,20 +129,30 @@ nav {
 
 /* CARDS */
 .cardContainer {
-  column-count: 4;
+  column-count: 3;
   column-gap: 2vh;
   margin: 2vh;
+}
+#visitedContainer {
+  display: flex;
+  flex-direction: row;
 }
 .playgroundCard {
   border-radius: 25px;
   break-inside: avoid;
   margin-bottom: 16px;
+  border: 2px white solid;
+}
+#userCard {
+  min-width: 18rem;
+  height: fit-content;
+  margin: 3%;
 }
 
 /* IMAGES */
 .playgroundImage {
   border-radius: 25px;
-  padding: 5%;
+  padding: 8px;
 }
 
 
@@ -144,8 +165,4 @@ nav {
   min-width: 50%;
   max-width: 100%;
   padding: 3%;
-}
-
-.nav-link {
-  padding-top: 3vh;
 }
