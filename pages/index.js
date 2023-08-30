@@ -147,9 +147,11 @@ function Home() {
   return (
     <div className="text-center my-4">
 
-      <h1 id="hello">Hello {user.displayName}! </h1>
-
-      <SearchBar onKeyUp={(query) => filterResult(query)} />
+      <h4 id="hello">hi {user.displayName}! </h4>
+      <h1 id="title">find a playground</h1>
+      <div id="searchContainer">
+        <SearchBar onKeyUp={(query) => filterResult(query)} />
+      </div>
 
       <Button onClick={toggleCommCenterFilter} className="filterButton" style={{ backgroundColor: activeFilter === 'commCenter' ? '#5FB0F1' : 'tomato' }}>
         community center
