@@ -106,6 +106,21 @@ const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const filterPlaygrounds = (uid, filterType) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const filteredData = Object.values(data).filter((item) => item[filterType]);
+      resolve(filteredData);
+    })
+    .catch(reject);
+});
+
 export {
   getPlaygrounds,
   createPlayground,
@@ -115,4 +130,5 @@ export {
   getSinglePlayground,
   updatePlayground,
   getPlaygroundsInNeighborhood,
+  filterPlaygrounds,
 };
