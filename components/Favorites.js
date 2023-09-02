@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { favoritePlaygrounds } from '../api/playgroundData';
-import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
+import { useAuth } from '../utils/context/authContext';
 import PlaygroundCard from './PlaygroundCard';
 
 function Favorites() {

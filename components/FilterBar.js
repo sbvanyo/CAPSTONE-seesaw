@@ -1,154 +1,104 @@
-import React, { useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import FilterCommCenter from './filters/FilterCommCenter';
-import FilterHiking from './filters/FilterHiking';
-import FilterIndoor from './filters/FilterIndoor';
-import FilterLibrary from './filters/FilterLibrary';
-import FilterPavedTrail from './filters/FilterPavedTrail';
-import FilterPavilion from './filters/FilterPavilion';
-import FilterSandbox from './filters/FilterSandbox';
-import FilterWater from './filters/FilterWater';
+import { useAuth } from '../utils/context/authContext';
+import { filterPlaygrounds } from '../api/playgroundData';
 
-export default function FilterBar({ setPlaygrounds, originalPlaygrounds }) {
-  // Set a state for filters - false by default, to be toggled between true and false. State variables control whether filter components imported above (FilterWater, etc) should be rendered or not.
-  const [showCommCenterFilter, setShowCommCenterFilter] = useState(false);
-  const [showHikingFilter, setShowHikingFilter] = useState(false);
-  const [showIndoorFilter, setShowIndoorFilter] = useState(false);
-  const [showLibraryFilter, setShowLibraryFilter] = useState(false);
-  const [showPavedTrailFilter, setShowPavedTrailFilter] = useState(false);
-  const [showPavilionFilter, setShowPavilionFilter] = useState(false);
-  const [showSandboxFilter, setShowSandboxFilter] = useState(false);
-  const [showWaterFilter, setShowWaterFilter] = useState(false);
+// Filter() takes 2 props, defined in index.html, giving this function access to use and manipulate those pieces
+function Filter({ setPlaygrounds, originalPlaygrounds }) {
+  const { user } = useAuth();
+  // initialize state for filter with initial value of null (no filter)
+  const [filter, setFilter] = useState(null);
 
-  // Toggle filters
-  const toggleCommCenterFilter = () => {
-    if (showCommCenterFilter) {
+  const handleFilterClick = (filterType) => {
+    // Toggles filter on and off:
+    // - Checks to see if the current state of 'filter' is equal to the name of the filter being passed in on the clicked button.
+    // - If so, 'filter' is reset to a null state and the original, full array of playgrounds is passed into the 'setPlaygrounds' setter function (in index.html), setting 'playgrounds' to the original array (toggles off). Otherwise, 'setFilter' sets 'filter' to the filter type being passed in on the button (toggles on).
+    if (filter === filterType) {
+      setFilter(null);
       setPlaygrounds(originalPlaygrounds);
+    } else {
+      setFilter(filterType);
     }
-    setShowCommCenterFilter(!showCommCenterFilter);
   };
 
-  const toggleHikingFilter = () => {
-    if (showHikingFilter) {
-      setPlaygrounds(originalPlaygrounds);
+  // Runs everytime 'user', 'filter', or 'setPlaygrounds' changes. If 'filter' is not null, calls the 'filterPlaygrounds' Promise and passes in the current state of 'filter'. This fetches the relevant  filtered array of playgrounds, then sets 'playgrounds' to the fetched data.
+  useEffect(() => {
+    if (filter !== null) {
+      filterPlaygrounds(user.uid, filter).then((data) => {
+        setPlaygrounds(data);
+      });
     }
-    setShowHikingFilter(!showHikingFilter);
-  };
-
-  const toggleIndoorFilter = () => {
-    if (showIndoorFilter) {
-      setPlaygrounds(originalPlaygrounds);
-    }
-    setShowIndoorFilter(!showIndoorFilter);
-  };
-
-  const toggleLibraryFilter = () => {
-    if (showLibraryFilter) {
-      setPlaygrounds(originalPlaygrounds);
-    }
-    setShowLibraryFilter(!showLibraryFilter);
-  };
-
-  const togglePavedTrailFilter = () => {
-    if (showPavedTrailFilter) {
-      setPlaygrounds(originalPlaygrounds);
-    }
-    setShowPavedTrailFilter(!showPavedTrailFilter);
-  };
-
-  const togglePavilionFilter = () => {
-    if (showPavilionFilter) {
-      setPlaygrounds(originalPlaygrounds);
-    }
-    setShowPavilionFilter(!showPavilionFilter);
-  };
-
-  const toggleSandboxFilter = () => {
-    if (showSandboxFilter) {
-      setPlaygrounds(originalPlaygrounds);
-    }
-    setShowSandboxFilter(!showSandboxFilter);
-  };
-
-  const toggleWaterFilter = () => {
-    if (showWaterFilter) {
-      setPlaygrounds(originalPlaygrounds);
-    }
-    setShowWaterFilter(!showWaterFilter);
-  };
+  }, [user, filter, setPlaygrounds]);
 
   return (
     <>
-      <Button onClick={toggleCommCenterFilter} className="filterButton">
-        {/* Conditionally render text to button based on whether or not filter is on */}
-        {showCommCenterFilter ? 'remove comm center filter' : 'apply comm center filter'}
-        {/* Toggles 'showFilter' state to conditionally render 'FilterSandbox' component. -'&&' will render whatever is to the right if the condition on the left evaluates to true. setPlaygrounds setter function is passed to FilterSandbox component, which updates the 'playgrounds' array when it is called, replacing the existing array with the filtered one */}
-        {showCommCenterFilter && <FilterCommCenter setPlaygrounds={setPlaygrounds} />}
+      <Button
+        onClick={() => handleFilterClick('comm_center')}
+        className="filterButton"
+        style={{ backgroundColor: filter === 'comm_center' ? '#5FB0F1' : 'tomato' }}
+      >community center
       </Button>
 
-      <Button onClick={toggleHikingFilter} className="filterButton">
-        {showHikingFilter ? 'remove hiking filter' : 'apply hiking filter'}
-        {showHikingFilter && <FilterHiking setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('hiking')} className="filterButton" style={{ backgroundColor: filter === 'hiking' ? '#5FB0F1' : 'tomato' }}>
+        hiking
       </Button>
 
-      <Button onClick={toggleIndoorFilter} className="filterButton">
-        {showIndoorFilter ? 'remove indoor filter' : 'apply indoor filter'}
-        {showIndoorFilter && <FilterIndoor setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('indoor')} className="filterButton" style={{ backgroundColor: filter === 'indoor' ? '#5FB0F1' : 'tomato' }}>
+        indoor
       </Button>
 
-      <Button onClick={toggleLibraryFilter} className="filterButton">
-        {showLibraryFilter ? 'remove library filter' : 'apply library filter'}
-        {showLibraryFilter && <FilterLibrary setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('library')} className="filterButton" style={{ backgroundColor: filter === 'library' ? '#5FB0F1' : 'tomato' }}>
+        library
       </Button>
 
-      <Button onClick={togglePavedTrailFilter} className="filterButton">
-        {showPavedTrailFilter ? 'remove paved trail filter' : 'apply paved trail filter'}
-        {showPavedTrailFilter && <FilterPavedTrail setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('paved_trail')} className="filterButton" style={{ backgroundColor: filter === 'paved_trail' ? '#5FB0F1' : 'tomato' }}>
+        paved trail
       </Button>
 
-      <Button onClick={togglePavilionFilter} className="filterButton">
-        {showPavilionFilter ? 'remove pavilion filter' : 'apply pavilion filter'}
-        {showPavilionFilter && <FilterPavilion setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('pavilion')} className="filterButton" style={{ backgroundColor: filter === 'pavilion' ? '#5FB0F1' : 'tomato' }}>
+        picnic pavilion
       </Button>
 
-      <Button onClick={toggleSandboxFilter} className="filterButton">
-        {showSandboxFilter ? 'remove sandbox filter' : 'apply sandbox filter'}
-        {showSandboxFilter && <FilterSandbox setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('sandbox')} className="filterButton" style={{ backgroundColor: filter === 'sandbox' ? '#5FB0F1' : 'tomato' }}>
+        sandbox
       </Button>
 
-      <Button onClick={toggleWaterFilter} className="filterButton">
-        {showWaterFilter ? 'remove water filter' : 'apply water filter'}
-        {showWaterFilter && <FilterWater setPlaygrounds={setPlaygrounds} />}
+      <Button onClick={() => handleFilterClick('water')} className="filterButton" style={{ backgroundColor: filter === 'water' ? '#5FB0F1' : 'tomato' }}>
+        water play
       </Button>
     </>
   );
 }
 
-FilterBar.propTypes = {
+export default Filter;
+
+Filter.propTypes = {
   setPlaygrounds: PropTypes.func.isRequired,
-  originalPlaygrounds: PropTypes.arrayOf(PropTypes.shape({
-    address: PropTypes.string,
-    city: PropTypes.string,
-    comm_center: PropTypes.bool,
-    favorite: PropTypes.bool,
-    firebaseKey: PropTypes.string,
-    hiking: PropTypes.bool,
-    hot_tip: PropTypes.string,
-    image: PropTypes.string,
-    indoor: PropTypes.bool,
-    latlng: PropTypes.string,
-    library: PropTypes.bool,
-    name: PropTypes.string,
-    neighborhood: PropTypes.string,
-    neighborhood_id: PropTypes.string,
-    paved_trail: PropTypes.bool,
-    pavilion: PropTypes.bool,
-    sandbox: PropTypes.bool,
-    state: PropTypes.string,
-    uid: PropTypes.string,
-    visited: PropTypes.bool,
-    water: PropTypes.bool,
-    zip: PropTypes.string,
-  })).isRequired,
+  originalPlaygrounds: PropTypes.arrayOf(
+    PropTypes.shape({
+      address: PropTypes.string,
+      city: PropTypes.string,
+      comm_center: PropTypes.bool,
+      favorite: PropTypes.bool,
+      firebaseKey: PropTypes.string,
+      hiking: PropTypes.bool,
+      hot_tip: PropTypes.string,
+      image: PropTypes.string,
+      indoor: PropTypes.bool,
+      latlng: PropTypes.string,
+      library: PropTypes.bool,
+      name: PropTypes.string,
+      neighborhood: PropTypes.string,
+      neighborhood_id: PropTypes.string,
+      paved_trail: PropTypes.bool,
+      pavilion: PropTypes.bool,
+      sandbox: PropTypes.bool,
+      state: PropTypes.string,
+      uid: PropTypes.string,
+      visited: PropTypes.bool,
+      water: PropTypes.bool,
+      zip: PropTypes.string,
+    }),
+  ).isRequired,
 };
