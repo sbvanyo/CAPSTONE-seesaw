@@ -1,12 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { useAuth } from '../utils/context/authContext';
+// import { useAuth } from '../utils/context/authContext';
 import { filterPlaygrounds } from '../api/playgroundData';
 
 // Filter() takes 2 props, defined in index.html, giving this function access to use and manipulate those pieces
 function Filter({ setPlaygrounds, originalPlaygrounds }) {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   // initialize state for filter with initial value of null (no filter)
   const [filter, setFilter] = useState(null);
 
@@ -25,19 +25,18 @@ function Filter({ setPlaygrounds, originalPlaygrounds }) {
   // Runs everytime 'user', 'filter', or 'setPlaygrounds' changes. If 'filter' is not null, calls the 'filterPlaygrounds' Promise and passes in the current state of 'filter'. This fetches the relevant  filtered array of playgrounds, then sets 'playgrounds' to the fetched data.
   useEffect(() => {
     if (filter !== null) {
-      filterPlaygrounds(user.uid, filter).then((data) => {
+      filterPlaygrounds(filter).then((data) => {
         setPlaygrounds(data);
       });
     }
-  }, [user, filter, setPlaygrounds]);
+  }, [filter, setPlaygrounds]);
 
   return (
     <>
-      <Button
-        onClick={() => handleFilterClick('comm_center')}
-        className="filterButton"
-        style={{ backgroundColor: filter === 'comm_center' ? '#5FB0F1' : 'tomato' }}
-      >community center
+      {/* Wrapping 'handleFilterClick' in an anonymous function delays its execution until the button is clicked. Without the anon function, it would run as soon as the Button rendered.  */}
+
+      <Button onClick={() => handleFilterClick('comm_center')} className="filterButton" style={{ backgroundColor: filter === 'comm_center' ? '#5FB0F1' : 'tomato' }}>
+        community center
       </Button>
 
       <Button onClick={() => handleFilterClick('hiking')} className="filterButton" style={{ backgroundColor: filter === 'hiking' ? '#5FB0F1' : 'tomato' }}>

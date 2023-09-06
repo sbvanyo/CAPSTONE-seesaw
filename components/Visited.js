@@ -1,8 +1,7 @@
 // import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
 import { useEffect, useState } from 'react';
 import { visitedPlaygrounds } from '../api/playgroundData';
-import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
-// import PlaygroundCard from './PlaygroundCard';
+import { useAuth } from '../utils/context/authContext';
 
 function Visited() {
   // Set a state for playgrounds
@@ -20,13 +19,14 @@ function Visited() {
   }, []);
 
   const visitedTotal = playgrounds.length;
-  console.warn(visitedTotal);
+  // console.warn(visitedTotal);
 
   return (
     <div className="text-center my-4">
       <div id="visitedTotal">
-        <h2>you&apos;ve visited <strong>{visitedTotal}</strong> playgrounds!</h2>
-        <h5>look at you go!</h5>
+        {visitedTotal === 1 ? <h2>you&apos;ve visited <strong>{visitedTotal}</strong> playground!</h2> : <h2>you&apos;ve visited <strong>{visitedTotal}</strong> playgrounds!</h2>}
+        {visitedTotal === 0 ? <h5>get out there and P L A Y.</h5> : <h5>look at you go!</h5>}
+
       </div>
       <div className="d-flex flex-wrap">
         {/* Map over playgrounds here using PlaygroundCard component. Returns a PlaygroundCard component for every item mapped over */}

@@ -37,7 +37,18 @@ function PlaygroundForm({ playgroundObj }) {
   useEffect(() => {
     getNeighborhoods(user.uid).then(setNeighborhoods);
 
-    if (playgroundObj.firebaseKey) setFormInput(playgroundObj);
+    if (playgroundObj.firebaseKey) {
+      if (playgroundObj.uid === user.uid) {
+        setFormInput(playgroundObj);
+      } else {
+        setFormInput((prevState) => ({
+          ...playgroundObj,
+          visited: false,
+          favorite: false,
+          uid: prevState.uid,
+        }));
+      }
+    }
   }, [playgroundObj, user]);
 
   const handleChange = (e) => {

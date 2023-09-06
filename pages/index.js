@@ -1,16 +1,20 @@
 // import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
 import { React, useEffect, useState } from 'react';
-import { getPlaygrounds } from '../api/playgroundData';
+// import { getPlaygrounds } from '../api/playgroundData';
 import { useAuth } from '../utils/context/authContext';
 import PlaygroundCard from '../components/PlaygroundCard';
 import SearchBar from '../components/SearchBar';
 import Filter from '../components/FilterBar';
+import { getPlaygrounds, favoritePlaygrounds, visitedPlaygrounds } from '../api/playgroundData';
 
 function Home() {
   // Set a state for playgrounds - 'playgrounds' holds the initial playgrounds array
   const [playgrounds, setPlaygrounds] = useState([]);
   // 'originalPlaygrounds' holds the original, unfiltered array of all playgrounds
   const [originalPlaygrounds, setOriginalPlaygrounds] = useState([]);
+
+  const [favPlaygrounds, setFavPlaygrounds] = useState([]);
+  const [visPlaygrounds, setVisPlaygrounds] = useState([]);
   // Get user ID via useAuth hook
   const { user } = useAuth();
 
@@ -29,6 +33,13 @@ function Home() {
       setPlaygrounds(allPlaygrounds);
     });
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      favoritePlaygrounds(user.uid).then(setFavPlaygrounds);
+      visitedPlaygrounds(user.uid).then(setVisPlaygrounds);
+    }
+  }, [user]);
 
   // SEARCH BAR FILTER
   const filterResult = (query) => {
@@ -57,7 +68,7 @@ function Home() {
       <div className="cardContainer">
         {/* Map over playgrounds array and return a PlaygroundCard for every item mapped over */}
         {playgrounds.map((playground) => (
-          <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getAllThePlaygrounds} />
+          <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getAllThePlaygrounds} favPlaygrounds={favPlaygrounds} visPlaygrounds={visPlaygrounds} />
         ))}
       </div>
       {/* </div> */}
