@@ -8,6 +8,7 @@ body {
   margin: 0;
   padding-left: 11%;
   font-family: 'Quicksand', sans-serif;
+  color: black;
 }
 
 a {
@@ -80,6 +81,11 @@ nav {
 .cardTitle {
   font-weight: 700;
 }
+.detailsTitle {
+  font-weight: bold;
+  /* padding: 15px; */
+}
+
 #visitedTotal {
   margin: 10%;
   margin-left: 20%;
@@ -128,11 +134,19 @@ nav {
 .submitBtn {
   background-color: #5FB0F1;
   border: none;
-  margin: 1vh;
+  margin: 1vh 0 1vh 0;
 }
-#signOutBtn {
+.btn-info {
+  width: 6rem;
+  background-color: #5FB0F1;
+  border: none;
+}
+.btn-danger {
+  width: 6rem;
   background-color: black;
   border: none;
+}
+#signOutBtn {
   position: fixed;
   bottom: 0;
   margin-bottom: 2vh;
@@ -194,6 +208,8 @@ nav {
 .playgroundImage {
   border-radius: 25px;
   padding: 8px;
+  max-width: 30rem;
+  align-self: center;
 }
 
 
@@ -222,4 +238,14 @@ form {
 }
 #featuresTitle {
   font-weight: 500;
+}
+
+
+
+#playgroundDetailsTop {
+  display: flex;
+  flex-direction: row;
+}
+#playgroundDetailsHeader {
+  padding: 15px;
 }

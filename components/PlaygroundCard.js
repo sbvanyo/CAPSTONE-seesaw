@@ -1,19 +1,24 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+// import { useAuth } from '../utils/context/authContext';
 // import { deletePlayground } from '../api/playgroundData';
-
 function PlaygroundCard({ playgroundObj }) {
-  // console.warn(playgroundObj);
+  // const { user } = useAuth();
 
   return (
     <Card className="playgroundCard">
       <Card.Img variant="top" src={playgroundObj.image} alt={playgroundObj.name} className="playgroundImage" />
       <Card.Body>
         <Card.Title className="cardTitle">{playgroundObj.name}</Card.Title>
-        <p className="card-text bold">{playgroundObj.visited && <span>✅ i&apos;ve been here!<br /></span> }</p>
-        <p>{playgroundObj.favorite ? '💛 i love this playground' : ''}</p>
+
+        <p>
+          {playgroundObj.visited ? ' ✅ i\'ve been here! ' : ' '}
+          {playgroundObj.favorite ? '💛 i love this playground' : ''}
+        </p>
+
         {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
         <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2" id="viewBtn">VIEW</Button>

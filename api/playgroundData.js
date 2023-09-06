@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getPlaygrounds = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+const getPlaygrounds = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/playgrounds.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -106,8 +106,8 @@ const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const filterPlaygrounds = (uid, filterType) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+const filterPlaygrounds = (filterType) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/playgrounds.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

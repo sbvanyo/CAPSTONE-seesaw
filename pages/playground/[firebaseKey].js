@@ -31,27 +31,23 @@ export default function ViewPlayground({ onUpdate }) {
 
   return (
     <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
-        <img src={playgroundDetails.image} alt={playgroundDetails.name} style={{ width: '300px' }} />
-        {/* DYNAMIC LINK TO EDIT THE PLAYGROUND DETAILS  */}
-        <Link href={`./edit/${playgroundDetails.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisPlayground} className="m-2">
-          DELETE
-        </Button>
-      </div>
-      <div className="text-white ms-5 details">
-        <h3>{playgroundDetails.name}</h3>
-        <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
-        <p>
-          {playgroundDetails.visited ? ' ✅ i\'ve been here! ' : ' '}
-          {playgroundDetails.favorite ? '💛 i love this playground' : ''}
-        </p>
+      <div>
+        <div id="playgroundDetailsTop">
+          <img src={playgroundDetails.image} alt={playgroundDetails.name} className="playgroundImage" />
+          <div id="playgroundDetailsHeader">
+            <h1 className="detailsTitle">{playgroundDetails.name}</h1>
+            <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
+            <p>
+              {playgroundDetails.visited ? ' ✅ i\'ve been here! ' : ' '}
+              {playgroundDetails.favorite ? '💛 i love this playground' : ''}
+            </p>
+            <p>
+              Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
+            </p>
+          </div>
+        </div>
+
         <hr />
-        <p>
-          Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
-        </p>
         <p>HOT TIP: {playgroundDetails.hot_tip}</p>
         <h6>Features:</h6>
         <ul>
@@ -65,6 +61,14 @@ export default function ViewPlayground({ onUpdate }) {
           <li>{playgroundDetails.indoor ? '✅ Indoor' : '❌ Indoor'}</li>
         </ul>
         <hr />
+        <div>
+          <Link href={`./edit/${playgroundDetails.firebaseKey}`} passHref>
+            <Button variant="info">EDIT</Button>
+          </Link>
+          <Button variant="danger" onClick={deleteThisPlayground} className="m-2">
+            DELETE
+          </Button>
+        </div>
       </div>
     </div>
   );
