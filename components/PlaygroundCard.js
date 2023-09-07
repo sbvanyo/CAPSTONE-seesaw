@@ -3,10 +3,10 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-// import { useAuth } from '../utils/context/authContext';
+import { useAuth } from '../utils/context/authContext';
 // import { deletePlayground } from '../api/playgroundData';
 function PlaygroundCard({ playgroundObj }) {
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Card className="playgroundCard">
@@ -15,8 +15,8 @@ function PlaygroundCard({ playgroundObj }) {
         <Card.Title className="cardTitle">{playgroundObj.name}</Card.Title>
 
         <p>
-          {playgroundObj.visited ? ' ✅ i\'ve been here! ' : ' '}
-          {playgroundObj.favorite ? '💛 i love this playground' : ''}
+          {playgroundObj.visitedBy.includes(user.uid) ? ' ✅ i\'ve been here! ' : ''}
+          {playgroundObj.favoritedBy.includes(user.uid) ? '💛 i love this playground' : ''}
         </p>
 
         {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
@@ -34,6 +34,7 @@ PlaygroundCard.propTypes = {
     city: PropTypes.string,
     comm_center: PropTypes.bool,
     favorite: PropTypes.bool,
+    favoritedBy: PropTypes.arrayOf(PropTypes.string),
     firebaseKey: PropTypes.string,
     hiking: PropTypes.bool,
     hot_tip: PropTypes.string,
@@ -50,6 +51,7 @@ PlaygroundCard.propTypes = {
     state: PropTypes.string,
     uid: PropTypes.string,
     visited: PropTypes.bool,
+    visitedBy: PropTypes.arrayOf(PropTypes.string),
     water: PropTypes.bool,
     zip: PropTypes.string,
   }).isRequired,
