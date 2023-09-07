@@ -6,10 +6,12 @@ import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { viewPlaygroundDetails } from '../../api/mergedData';
 import { deletePlayground } from '../../api/playgroundData';
+import { useAuth } from '../../utils/context/authContext';
 
 export default function ViewPlayground({ onUpdate }) {
   const [playgroundDetails, setPlaygroundDetails] = useState({});
   const router = useRouter();
+  const { user } = useAuth();
 
   // grab firebaseKey from url
   const { firebaseKey } = router.query;
@@ -38,8 +40,8 @@ export default function ViewPlayground({ onUpdate }) {
             <h1 className="detailsTitle">{playgroundDetails.name}</h1>
             <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
             <p>
-              {playgroundDetails.visited ? ' ✅ i\'ve been here! ' : ' '}
-              {playgroundDetails.favorite ? '💛 i love this playground' : ''}
+              {playgroundDetails?.visitedBy?.includes(user.uid) ? ' ✅ i\'ve been here! ' : ''}
+              {playgroundDetails?.favoritedBy?.includes(user.uid) ? '💛 i love this playground' : ''}
             </p>
             <p>
               Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
@@ -80,6 +82,7 @@ ViewPlayground.propTypes = {
     city: PropTypes.string,
     comm_center: PropTypes.bool,
     favorite: PropTypes.bool,
+    favoritedBy: PropTypes.arrayOf(PropTypes.string),
     firebaseKey: PropTypes.string,
     hiking: PropTypes.bool,
     hot_tip: PropTypes.string,
@@ -96,6 +99,7 @@ ViewPlayground.propTypes = {
     state: PropTypes.string,
     uid: PropTypes.string,
     visited: PropTypes.bool,
+    visitedBy: PropTypes.arrayOf(PropTypes.string),
     water: PropTypes.bool,
     zip: PropTypes.string,
   }).isRequired,

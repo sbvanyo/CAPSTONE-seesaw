@@ -52,6 +52,15 @@ const createPlayground = (payload) => new Promise((resolve, reject) => {
 });
 
 const updatePlayground = (payload) => new Promise((resolve, reject) => {
+  if (!payload.visitedBy || payload.visitedBy.length === 0) {
+    // eslint-disable-next-line no-param-reassign
+    payload.visitedBy = '';
+  }
+  if (!payload.favoritedBy || payload.favoritedBy.length === 0) {
+    // eslint-disable-next-line no-param-reassign
+    payload.favoritedBy = '';
+  }
+
   fetch(`${endpoint}/playgrounds/${payload.firebaseKey}.json`, {
     method: 'PATCH',
     headers: {
@@ -77,7 +86,7 @@ const getPlaygroundsInNeighborhood = (firebaseKey) => new Promise((resolve, reje
 });
 
 const favoritePlaygrounds = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/playgrounds.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -85,14 +94,15 @@ const favoritePlaygrounds = (uid) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const favorites = Object.values(data).filter((item) => item.favorite);
+      const playgrounds = Object.values(data);
+      const favorites = playgrounds.filter((playground) => playground.favoritedBy && playground.favoritedBy.includes(uid));
       resolve(favorites);
     })
     .catch(reject);
 });
 
 const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/playgrounds.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -100,11 +110,42 @@ const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const visited = Object.values(data).filter((item) => item.visited);
+      const playgrounds = Object.values(data);
+      const visited = playgrounds.filter((playground) => playground.visitedBy && playground.visitedBy.includes(uid));
       resolve(visited);
     })
     .catch(reject);
 });
+
+// const favoritePlaygrounds = (uid) => new Promise((resolve, reject) => {
+//   fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const favorites = Object.values(data).filter((item) => item.favorite);
+//       resolve(favorites);
+//     })
+//     .catch(reject);
+// });
+
+// const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
+//   fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const visited = Object.values(data).filter((item) => item.visited);
+//       resolve(visited);
+//     })
+//     .catch(reject);
+// });
 
 const filterPlaygrounds = (filterType) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/playgrounds.json`, {

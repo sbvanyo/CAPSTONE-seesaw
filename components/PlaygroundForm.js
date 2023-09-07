@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -17,7 +18,9 @@ const initialState = {
   zip: '',
   hot_tip: '',
   visited: false,
+  visitedBy: [],
   favorite: false,
+  favoritedBy: [],
   paved_trail: false,
   pavilion: false,
   library: false,
@@ -59,13 +62,92 @@ function PlaygroundForm({ playgroundObj }) {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (playgroundObj.firebaseKey) {
-      updatePlayground(formInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (playgroundObj.firebaseKey) {
+  //     updatePlayground(formInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
+  //   } else {
+  //     // Spread syntax unpacks state object (formInput) and allows us to add uid to it
+  //     const payload = { ...formInput, uid: user.uid };
+  //     createPlayground(payload).then(({ name }) => {
+  //       const patchPayload = { firebaseKey: name };
+  //       updatePlayground(patchPayload).then(() => {
+  //         router.push('/');
+  //       });
+  //     });
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (playgroundObj.firebaseKey) {
+  //     if (formInput.favorite) {
+  //       // Add the user's UID to the 'favoritedBy' array if it doesn't already exist
+  //       const favoritedBy = playgroundObj.favoritedBy || [];
+  //       if (!favoritedBy.includes(user.uid)) {
+  //         favoritedBy.push(user.uid);
+  //       }
+  //       formInput.favoritedBy = favoritedBy;
+  //     } else {
+  //       // Remove the user's UID from the 'favoritedBy' array
+  //       const favoritedBy = playgroundObj.favoritedBy || [];
+  //       const index = favoritedBy.indexOf(user.uid);
+  //       if (index > -1) {
+  //         favoritedBy.splice(index, 1);
+  //       }
+  //       formInput.favoritedBy = favoritedBy;
+  //     }
+
+  //     // Update the playground object
+  //     updatePlayground(formInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
+  //   } else {
+  //     // Create a new playground
+  //     const payload = { ...formInput, uid: user.uid, favoritedBy: formInput.favorite ? [user.uid] : [] };
+  //     createPlayground(payload).then(({ name }) => {
+  //       const patchPayload = { firebaseKey: name };
+  //       updatePlayground(patchPayload).then(() => {
+  //         router.push('/');
+  //       });
+  //     });
+  //   }
+  // };
+
+  const updateUidArray = (array, uid, shouldAdd) => {
+    const newArray = array || [];
+    if (shouldAdd) {
+      if (!newArray.includes(uid)) {
+        newArray.push(uid);
+      }
     } else {
-      // Spread syntax unpacks state object (formInput) and allows us to add uid to it
-      const payload = { ...formInput, uid: user.uid };
+      const index = newArray.indexOf(uid);
+      if (index > -1) {
+        newArray.splice(index, 1);
+      }
+    }
+    return newArray;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedFormInput = { ...formInput };
+
+    if (playgroundObj.firebaseKey) {
+      // Update favoritedBy and visitedBy arrays
+      updatedFormInput.favoritedBy = updateUidArray(playgroundObj.favoritedBy, user.uid, formInput.favorite);
+      updatedFormInput.visitedBy = updateUidArray(playgroundObj.visitedBy, user.uid, formInput.visited);
+
+      // Update the playground object
+      await updatePlayground(updatedFormInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
+    } else {
+      // Create a new playground
+      const payload = {
+        ...formInput,
+        uid: user.uid,
+        favoritedBy: formInput.favorite ? [user.uid] : [],
+        visitedBy: formInput.visited ? [user.uid] : [],
+      };
       createPlayground(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updatePlayground(patchPayload).then(() => {
@@ -345,6 +427,7 @@ PlaygroundForm.propTypes = {
     city: PropTypes.string,
     comm_center: PropTypes.bool,
     favorite: PropTypes.bool,
+    favoritedBy: PropTypes.array,
     firebaseKey: PropTypes.string,
     hiking: PropTypes.bool,
     hot_tip: PropTypes.string,
@@ -361,6 +444,7 @@ PlaygroundForm.propTypes = {
     state: PropTypes.string,
     uid: PropTypes.string,
     visited: PropTypes.bool,
+    visitedBy: PropTypes.array,
     water: PropTypes.bool,
     zip: PropTypes.string,
   }),
