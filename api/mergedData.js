@@ -4,7 +4,7 @@ import { getSinglePlayground, deletePlayground } from './playgroundData';
 const viewPlaygroundDetails = (playgroundFirebaseKey) => new Promise((resolve, reject) => {
   getSinglePlayground(playgroundFirebaseKey)
     .then((playgroundObject) => {
-      console.warn(playgroundObject);
+      // console.warn(playgroundObject);
       getSingleNeighborhood(playgroundObject.neighborhood_id)
         .then((neighborhoodObject) => {
           resolve({ neighborhoodObject, ...playgroundObject });
