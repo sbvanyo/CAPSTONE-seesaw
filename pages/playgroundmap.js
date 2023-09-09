@@ -19,6 +19,7 @@ function PlaygroundMap() {
 
   return (
     <>
+      <h1 className="subtitle">discover playgrounds</h1>
       {!isLoaded ? 'Loading...' : <FullMap playgrounds={playgrounds} />}
     </>
   );

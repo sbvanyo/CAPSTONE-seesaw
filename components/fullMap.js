@@ -47,7 +47,7 @@ function FullMap({ playgrounds }) {
       <GoogleMap
         zoom={11}
         center={center}
-        mapContainerClassName="map-container"
+        mapContainerClassName="full-map-container"
       >
         {/* Only renders Marker if coordinates are not null */}
         {allCoordinates.map((coord) => (
