@@ -380,6 +380,21 @@ function PlaygroundForm({ playgroundObj }) {
             }));
           }}
         />
+
+        <Form.Check
+          className="text-white mb-3"
+          type="checkbox"
+          id="indoor"
+          name="indoor"
+          label="indoor"
+          checked={formInput.indoor}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              indoor: e.target.checked,
+            }));
+          }}
+        />
       </div>
 
       <br />
