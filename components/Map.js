@@ -5,18 +5,17 @@ import {
   // Circle,
   // MarkerClusterer,
 } from '@react-google-maps/api';
-// import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import getLatLngFromAddress from '../api/mapData';
 
 function Map({ playground }) {
-  const center = useMemo(() => ({ lat: 36.0763082, lng: -86.6262617 }), []);
   const markerAddress = `${playground.address},  ${playground.city}, ${playground.state} ${playground.zip}`;
 
   // Initialize state for coordinates
   const [coordinates, setCoordinates] = useState(null);
 
+  // Runs when component mounts or when markerAddress changes (dependency array). Calls Promise to convert standard address into lat/lng coordinates, dynamically passing in the playground address. If coords are fetched successfully, setter function (setCoordinates) sets 'coordinates' state to the returned coordinates.
   useEffect(() => {
     getLatLngFromAddress(markerAddress)
       .then((coords) => {
@@ -30,14 +29,16 @@ function Map({ playground }) {
       });
   }, [markerAddress]);
 
+  const center = coordinates ? { lat: coordinates.lat, lng: coordinates.lng } : null;
+
   return (
     <>
-      <h3>map goes here</h3>
       <GoogleMap
-        zoom={10}
+        zoom={12}
         center={center}
         mapContainerClassName="map-container"
       >
+        {/* Only renders Marker if coordinates are not null */}
         {coordinates && <Marker position={{ lat: coordinates.lat, lng: coordinates.lng }} key={playground.firebaseKey} />}
       </GoogleMap>
     </>

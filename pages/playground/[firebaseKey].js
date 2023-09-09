@@ -55,34 +55,32 @@ export default function ViewPlayground({ onUpdate }) {
               <p>
                 Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
               </p>
+              <h6>Features:</h6>
+              <ul>
+                <li>{playgroundDetails.hiking ? '✅ Hiking' : '❌ Hiking'}</li>
+                <li>{playgroundDetails.paved_trail ? '✅ Paved Trail' : '❌ Paved Trail'}</li>
+                <li>{playgroundDetails.pavilion ? '✅ Picnic Pavilion' : '❌ Picnic Pavilion'}</li>
+                <li>{playgroundDetails.water ? '✅ Water Play' : '❌ Water Play'}</li>
+                <li>{playgroundDetails.sandbox ? '✅ Sandbox' : '❌ Sandbox'}</li>
+                <li>{playgroundDetails.library ? '✅ Next to a Library' : '❌ Next to a Library'}</li>
+                <li>{playgroundDetails.comm_center ? '✅ Next to a Community Center' : '❌ Next to a Community Center'}</li>
+                <li>{playgroundDetails.indoor ? '✅ Indoor' : '❌ Indoor'}</li>
+              </ul>
             </div>
           </div>
-
+          <p><strong>HOT TIP:</strong> {playgroundDetails.hot_tip}</p>
           <hr />
-          <p>HOT TIP: {playgroundDetails.hot_tip}</p>
-          <h6>Features:</h6>
-          <ul>
-            <li>{playgroundDetails.hiking ? '✅ Hiking' : '❌ Hiking'}</li>
-            <li>{playgroundDetails.paved_trail ? '✅ Paved Trail' : '❌ Paved Trail'}</li>
-            <li>{playgroundDetails.pavilion ? '✅ Picnic Pavilion' : '❌ Picnic Pavilion'}</li>
-            <li>{playgroundDetails.water ? '✅ Water Play' : '❌ Water Play'}</li>
-            <li>{playgroundDetails.sandbox ? '✅ Sandbox' : '❌ Sandbox'}</li>
-            <li>{playgroundDetails.library ? '✅ Next to a Library' : '❌ Next to a Library'}</li>
-            <li>{playgroundDetails.comm_center ? '✅ Next to a Community Center' : '❌ Next to a Community Center'}</li>
-            <li>{playgroundDetails.indoor ? '✅ Indoor' : '❌ Indoor'}</li>
-          </ul>
-          <hr />
-          <div>
-            <Link href={`./edit/${playgroundDetails.firebaseKey}`} passHref>
-              <Button variant="info">EDIT</Button>
-            </Link>
-            <Button variant="danger" onClick={deleteThisPlayground} className="m-2">
-              DELETE
-            </Button>
-          </div>
         </div>
       </div>
       {!isLoaded ? 'Loading...' : <Map playground={playgroundDetails} />}
+      <div className="detailBtnGroup">
+        <Link href={`./edit/${playgroundDetails.firebaseKey}`} passHref>
+          <Button variant="info">edit</Button>
+        </Link>
+        <Button variant="danger" onClick={deleteThisPlayground} className="m-2">
+          delete
+        </Button>
+      </div>
     </>
   );
 }
