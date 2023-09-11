@@ -128,8 +128,10 @@ nav {
   border: white 8px solid;
   height: 15vh;
   width: 15vh;
-  padding-top: 30px;
   margin-bottom: 30px;
+  text-align: center;
+  padding-top: 35px;
+  padding-bottom: auto;
 }
 #addNeighborhoodBtn {
   background-color: #5FB0F1;
@@ -275,4 +277,18 @@ form {
 }
 #playgroundDetailsHeader {
   padding: 15px;
+}
+.details-modal {
+  position: absolute;
+  top: 40%;
+  left: 42%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: 1s ease; 
 }
