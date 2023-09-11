@@ -16,7 +16,7 @@ function FullMap({ playgrounds }) {
 
   useEffect(() => {
     const coordsArray = [];
-    console.warn(playgrounds);
+    // console.warn(playgrounds);
 
     // Creates an array of Promises (one for each playground) to fetch all the coordinates. '.map' only executes if 'playgrounds' exists.
     const promiseArray = playgrounds && playgrounds.map((playground) => {
@@ -24,7 +24,8 @@ function FullMap({ playgrounds }) {
       return getLatLngFromAddress(markerAddress)
         .then((coords) => {
           if (coords) {
-            coordsArray.push({ ...coords, firebaseKey: playground.firebaseKey });
+            coordsArray.push({ ...coords, ...playground });
+            // console.warn(markerAddress);
           }
         })
         .catch((error) => {
@@ -42,7 +43,7 @@ function FullMap({ playgrounds }) {
   }, [playgrounds]);
 
   const handleMarkerClick = (markerData) => {
-    console.warn(`marker clicked: ${markerData.firebaseKey}`);
+    console.warn(`marker clicked: ${markerData.firebaseKey}, ${markerData}`);
     setSelectedPlayground(markerData);
   };
 
