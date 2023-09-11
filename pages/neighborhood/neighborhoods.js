@@ -9,15 +9,15 @@ function Neighborhoods() {
   // Set a state for neighborhoods
   const [neighborhoods, setNeighborhoods] = useState([]);
 
-  // Get user ID using useAuth Hook
+  // Get user ID using useAuth hook
   const { user } = useAuth();
 
-  // create a function that makes the API call to get all the authors
+  // create a function that makes the API call to get all the neighborhoods
   const getAllTheNeighborhoods = () => {
     getNeighborhoods(user.uid).then(setNeighborhoods);
   };
 
-  // make the call to the API to get all the authors on component render
+  // make the call to the API to get all the neighborhoods on component render
   useEffect(() => {
     getAllTheNeighborhoods();
   });

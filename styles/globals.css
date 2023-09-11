@@ -177,6 +177,7 @@ nav {
   break-inside: avoid;
   margin-bottom: 16px;
   border: 2px white solid;
+  max-width: 25rem;
 }
 
 .neighborhoodCard {
@@ -221,6 +222,17 @@ nav {
   max-width: 35rem;
   align-self: center;
   margin-bottom: 15px;
+}
+.neighborhoodImage {
+  border-radius: 25px;
+  border: 5px white solid;
+  padding: 8px;
+  max-width: 75%;
+  align-self: center;
+  margin: 20px 0;
+}
+#neighborhoodPlaygrounds {
+  
 }
 
 

@@ -76,7 +76,7 @@ function NeighborhoodForm({ neighborhoodObj }) {
         />
       </FloatingLabel>
 
-      {/* FAVORITE TOGGLE  */}
+      {/* FAVORITE TOGGLE
       <Form.Check
         className="text-white mb-3"
         type="switch"
@@ -90,7 +90,7 @@ function NeighborhoodForm({ neighborhoodObj }) {
             favorite: e.target.checked,
           }));
         }}
-      />
+      /> */}
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit" className="submitBtn">{neighborhoodObj.firebaseKey ? 'update' : 'create'} neighborhood</Button>
