@@ -12,6 +12,7 @@ import getLatLngFromAddress from '../api/mapData';
 function FullMap({ playgrounds }) {
   // Initialize state to hold coordinates of all playgrounds
   const [allCoordinates, setAllCoordinates] = useState([]);
+  const [selectedPlayground, setSelectedPlayground] = useState(null);
 
   useEffect(() => {
     const coordsArray = [];
@@ -40,6 +41,11 @@ function FullMap({ playgrounds }) {
       });
   }, [playgrounds]);
 
+  const handleMarkerClick = (markerData) => {
+    console.warn(`marker clicked: ${markerData.firebaseKey}`);
+    setSelectedPlayground(markerData);
+  };
+
   const center = { lat: 36.174465, lng: -86.767960 };
 
   return (
@@ -51,9 +57,17 @@ function FullMap({ playgrounds }) {
       >
         {/* Only renders Marker if coordinates are not null */}
         {allCoordinates.map((coord) => (
-          <Marker position={{ lat: coord.lat, lng: coord.lng }} key={coord.firebaseKey} />
+          <Marker position={{ lat: coord.lat, lng: coord.lng }} key={coord.firebaseKey} onClick={() => handleMarkerClick(coord)} />
         ))}
       </GoogleMap>
+
+      {selectedPlayground && (
+        <div className="details-modal">
+          <h2>{selectedPlayground.name}</h2>
+          <p>Address: {selectedPlayground.address}, {selectedPlayground.city}, {selectedPlayground.state} {selectedPlayground.zip}</p>
+          <button type="button" onClick={() => setSelectedPlayground(null)}>Close</button>
+        </div>
+      )}
     </>
   );
 }

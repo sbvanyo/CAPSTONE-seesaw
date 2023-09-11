@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { useLoadScript } from '@react-google-maps/api';
-import FullMap from '../components/fullMap';
+import FullMap from '../components/FullMap';
 import { getPlaygrounds } from '../api/playgroundData';
 
 function PlaygroundMap() {
