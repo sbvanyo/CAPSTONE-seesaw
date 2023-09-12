@@ -7,7 +7,12 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { getNeighborhoods } from '../api/neighborhoodData';
-import { createPlayground, updatePlayground } from '../api/playgroundData';
+import {
+  createPlayground,
+  updatePlayground,
+  // addFavoritePlayground,
+  // removeFavoritePlayground,
+} from '../api/playgroundData';
 
 const initialState = {
   name: '',
@@ -34,6 +39,7 @@ const initialState = {
 function PlaygroundForm({ playgroundObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [neighborhoods, setNeighborhoods] = useState([]);
+  // const [isFavorite, setIsFavorite] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -46,13 +52,50 @@ function PlaygroundForm({ playgroundObj }) {
       } else {
         setFormInput((prevState) => ({
           ...playgroundObj,
-          visited: false,
-          favorite: false,
+          // visited: false,
+          // favorite: false,
           uid: prevState.uid,
         }));
       }
     }
   }, [playgroundObj, user]);
+
+  // useEffect(() => {
+  //   setIsFavorite(playgroundObj.favoritedBy ? playgroundObj.favoritedBy.includes(user.uid) : false);
+  // }, [playgroundObj.favoritedBy, user.uid]);
+
+  // const toggleFavorite = () => {
+  //   console.warn('Before toggle:', isFavorite);
+  //   if (isFavorite) {
+  //     removeFavoritePlayground(playgroundObj.firebaseKey, user.uid)
+  //       .then(() => setIsFavorite(false))
+  //       .catch((error) => console.error('Error removing favorite:', error));
+  //   } else {
+  //     addFavoritePlayground(playgroundObj.firebaseKey, user.uid)
+  //       .then(() => setIsFavorite(true))
+  //       .catch((error) => console.error('Error adding favorite:', error));
+  //   }
+  // };
+
+  // const toggleFavorite = () => {
+  //   if (isFavorite) {
+  //     removeFavoritePlayground(playgroundObj.firebaseKey, user.uid)
+  //       .then(() => {
+  //         setIsFavorite(false);
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error removing favorite:', error);
+  //       });
+  //   } else {
+  //     addFavoritePlayground(playgroundObj.firebaseKey, user.uid)
+  //       .then(() => {
+  //         setIsFavorite(true);
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error adding favorite:', error);
+  //       });
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,71 +105,20 @@ function PlaygroundForm({ playgroundObj }) {
     }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (playgroundObj.firebaseKey) {
-  //     updatePlayground(formInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
-  //   } else {
-  //     // Spread syntax unpacks state object (formInput) and allows us to add uid to it
-  //     const payload = { ...formInput, uid: user.uid };
-  //     createPlayground(payload).then(({ name }) => {
-  //       const patchPayload = { firebaseKey: name };
-  //       updatePlayground(patchPayload).then(() => {
-  //         router.push('/');
-  //       });
-  //     });
-  //   }
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (playgroundObj.firebaseKey) {
-  //     if (formInput.favorite) {
-  //       // Add the user's UID to the 'favoritedBy' array if it doesn't already exist
-  //       const favoritedBy = playgroundObj.favoritedBy || [];
-  //       if (!favoritedBy.includes(user.uid)) {
-  //         favoritedBy.push(user.uid);
-  //       }
-  //       formInput.favoritedBy = favoritedBy;
-  //     } else {
-  //       // Remove the user's UID from the 'favoritedBy' array
-  //       const favoritedBy = playgroundObj.favoritedBy || [];
-  //       const index = favoritedBy.indexOf(user.uid);
-  //       if (index > -1) {
-  //         favoritedBy.splice(index, 1);
-  //       }
-  //       formInput.favoritedBy = favoritedBy;
+  // const updateUidArray = (array, uid, shouldAdd) => {
+  //   const newArray = array || [];
+  //   if (shouldAdd) {
+  //     if (!newArray.includes(uid)) {
+  //       newArray.push(uid);
   //     }
-
-  //     // Update the playground object
-  //     updatePlayground(formInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
   //   } else {
-  //     // Create a new playground
-  //     const payload = { ...formInput, uid: user.uid, favoritedBy: formInput.favorite ? [user.uid] : [] };
-  //     createPlayground(payload).then(({ name }) => {
-  //       const patchPayload = { firebaseKey: name };
-  //       updatePlayground(patchPayload).then(() => {
-  //         router.push('/');
-  //       });
-  //     });
+  //     const index = newArray.indexOf(uid);
+  //     if (index > -1) {
+  //       newArray.splice(index, 1);
+  //     }
   //   }
+  //   return newArray;
   // };
-
-  const updateUidArray = (array, uid, shouldAdd) => {
-    const newArray = array || [];
-    if (shouldAdd) {
-      if (!newArray.includes(uid)) {
-        newArray.push(uid);
-      }
-    } else {
-      const index = newArray.indexOf(uid);
-      if (index > -1) {
-        newArray.splice(index, 1);
-      }
-    }
-    return newArray;
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,9 +126,11 @@ function PlaygroundForm({ playgroundObj }) {
     const updatedFormInput = { ...formInput };
 
     if (playgroundObj.firebaseKey) {
-      // Update favoritedBy and visitedBy arrays
-      updatedFormInput.favoritedBy = updateUidArray(playgroundObj.favoritedBy, user.uid, formInput.favorite);
-      updatedFormInput.visitedBy = updateUidArray(playgroundObj.visitedBy, user.uid, formInput.visited);
+      // if ('favoritedBy' in playgroundObj) {
+      //   // Update favoritedBy and visitedBy arrays
+      //   updatedFormInput.favorite = toggleFavorite(playgroundObj.favorite, user.uid, formInput.favorite);
+      //   // updatedFormInput.visitedBy = updateUidArray(playgroundObj.visitedBy, user.uid, formInput.visited);
+      // }
 
       // Update the playground object
       await updatePlayground(updatedFormInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
@@ -145,8 +139,8 @@ function PlaygroundForm({ playgroundObj }) {
       const payload = {
         ...formInput,
         uid: user.uid,
-        favoritedBy: formInput.favorite ? [user.uid] : [],
-        visitedBy: formInput.visited ? [user.uid] : [],
+        // favoritedBy: formInput.favorite ? [user.uid] : [],
+        // visitedBy: formInput.visited ? [user.uid] : [],
       };
       createPlayground(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
@@ -399,7 +393,7 @@ function PlaygroundForm({ playgroundObj }) {
 
       <br />
 
-      {/* VISITED + FAVORITE TOGGLES */}
+      {/* VISITED + FAVORITE TOGGLES
       <Form.Check
         className="text-white mb-3"
         type="switch"
@@ -413,22 +407,17 @@ function PlaygroundForm({ playgroundObj }) {
             visited: e.target.checked,
           }));
         }}
-      />
-
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="favorite"
-        name="favorite"
-        label="Favorite?"
-        checked={formInput.favorite}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            favorite: e.target.checked,
-          }));
-        }}
-      />
+      /> */}
+      {/*
+            <Form.Check
+              className="text-white mb-3"
+              type="switch"
+              id="favorited"
+              name="favorite"
+              label="Favorite?"
+              checked={isFavorite}
+              onChange={toggleFavorite}
+            /> */}
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit" className="submitBtn">{playgroundObj.firebaseKey ? 'update' : 'create'} playground</Button>
