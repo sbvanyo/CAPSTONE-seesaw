@@ -5,6 +5,14 @@ import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useLoadScript } from '@react-google-maps/api';
+import {
+  Check2Circle,
+  XCircle,
+  HeartFill,
+  Check,
+  Trash3,
+  PencilSquare,
+} from 'react-bootstrap-icons';
 import Map from '../../components/Map';
 import { viewPlaygroundDetails } from '../../api/mergedData';
 import { deletePlayground } from '../../api/playgroundData';
@@ -41,30 +49,115 @@ export default function ViewPlayground({ onUpdate }) {
 
   return (
     <>
-      <div className="mt-5 d-flex flex-wrap">
+      <div className="playgroundDetails">
         <div>
           <div id="playgroundDetailsTop">
-            <img src={playgroundDetails.image} alt={playgroundDetails.name} className="playgroundImage" />
+            <img src={playgroundDetails.image} alt={playgroundDetails.name} className="playgroundImageDetails" />
             <div id="playgroundDetailsHeader">
               <h1 className="detailsTitle">{playgroundDetails.name}</h1>
               <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
+              <hr />
               <p>
-                {playgroundDetails?.visitedBy?.includes(user.uid) ? ' ✅ i\'ve been here! ' : ''}
-                {playgroundDetails?.favoritedBy?.includes(user.uid) ? '💛 i love this playground' : ''}
+                {playgroundDetails?.visitedBy?.includes(user.uid) ? (
+                  <>
+                    <Check className="details-check" /> i&apos;ve been here!
+                  </>
+                ) : (
+                  ''
+                )}
+                {playgroundDetails?.favoritedBy?.includes(user.uid) ? (
+                  <>
+                    <HeartFill className="details-heart" /> i love this playground
+                  </>
+                ) : (
+                  ''
+                )}
               </p>
               <p>
                 Address: {playgroundDetails.address}, {playgroundDetails.city}, {playgroundDetails.state} {playgroundDetails.zip}
               </p>
-              <h6>Features:</h6>
+              <h5>Features:</h5>
               <ul>
-                <li>{playgroundDetails.hiking ? '✅ Hiking' : '❌ Hiking'}</li>
-                <li>{playgroundDetails.paved_trail ? '✅ Paved Trail' : '❌ Paved Trail'}</li>
-                <li>{playgroundDetails.pavilion ? '✅ Picnic Pavilion' : '❌ Picnic Pavilion'}</li>
-                <li>{playgroundDetails.water ? '✅ Water Play' : '❌ Water Play'}</li>
-                <li>{playgroundDetails.sandbox ? '✅ Sandbox' : '❌ Sandbox'}</li>
-                <li>{playgroundDetails.library ? '✅ Next to a Library' : '❌ Next to a Library'}</li>
-                <li>{playgroundDetails.comm_center ? '✅ Next to a Community Center' : '❌ Next to a Community Center'}</li>
-                <li>{playgroundDetails.indoor ? '✅ Indoor' : '❌ Indoor'}</li>
+                <li>{playgroundDetails.hiking ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Hiking
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Hiking
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.paved_trail ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Paved Trail
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Paved Trail
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.pavilion ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Picnic Pavilion
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Picnic Pavilion
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.water ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Water Play
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Water Play
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.sandbox ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Sandbox
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Sandbox
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.library ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Next to a Library
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Next to a Library
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.comm_center ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Next to a Community Center
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Next to a Community Center
+                  </>
+                )}
+                </li>
+                <li>{playgroundDetails.indoor ? (
+                  <>
+                    <Check2Circle className="yes-check" /> Indoor
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="no-x" /> Indoor
+                  </>
+                )}
+                </li>
               </ul>
             </div>
           </div>
@@ -75,10 +168,10 @@ export default function ViewPlayground({ onUpdate }) {
       {!isLoaded ? 'Loading...' : <Map playground={playgroundDetails} />}
       <div className="detailBtnGroup">
         <Link href={`./edit/${playgroundDetails.firebaseKey}`} passHref>
-          <Button variant="info">edit</Button>
+          <Button variant="info"><PencilSquare /> edit</Button>
         </Link>
         <Button variant="danger" onClick={deleteThisPlayground} className="m-2">
-          delete
+          <Trash3 /> delete
         </Button>
       </div>
     </>

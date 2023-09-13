@@ -61,7 +61,7 @@ function Home() {
         <SearchBar onKeyUp={(query) => filterResult(query)} />
       </div>
 
-      <h5>or start your search here:</h5>
+      <h4>or start your search here:</h4>
 
       <Filter setPlaygrounds={setPlaygrounds} originalPlaygrounds={originalPlaygrounds} />
 
