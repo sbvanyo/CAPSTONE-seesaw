@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import { React, useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { HeartFill, Check } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -72,12 +72,14 @@ function PlaygroundCard({ playgroundObj }) {
 
   return (
     <Card className="playgroundCard">
-      <Card.Img
-        variant="top"
-        src={playgroundObj.image}
-        alt={playgroundObj.name}
-        className="playgroundImage"
-      />
+      <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
+        <Card.Img
+          variant="top"
+          src={playgroundObj.image}
+          alt={playgroundObj.name}
+          className="playgroundImage"
+        />
+      </Link>
 
       <HeartFill
         className={isFavorite ? 'heart-filled' : 'heart-empty'}
@@ -109,10 +111,10 @@ function PlaygroundCard({ playgroundObj }) {
           {playgroundObj.favoritedBy.includes(user.uid) ? '💛 i love this playground' : ''}
         </p> */}
 
-        {/* DYNAMIC LINK TO VIEW THE playground DETAILS  */}
+        {/* DYNAMIC LINK TO VIEW THE playground DETAILS
         <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2" id="viewBtn">VIEW</Button>
-        </Link>
+        </Link> */}
       </Card.Body>
     </Card>
   );

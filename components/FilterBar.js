@@ -34,38 +34,39 @@ function Filter({ setPlaygrounds, originalPlaygrounds }) {
   return (
     <>
       {/* Wrapping 'handleFilterClick' in an anonymous function delays its execution until the button is clicked. Without the anon function, it would run as soon as the Button rendered.  */}
+      <div id="filterBar">
+        <Button onClick={() => handleFilterClick('comm_center')} className="filterButton" style={{ backgroundColor: filter === 'comm_center' ? '#5FB0F1' : 'tomato' }}>
+          community center
+        </Button>
 
-      <Button onClick={() => handleFilterClick('comm_center')} className="filterButton" style={{ backgroundColor: filter === 'comm_center' ? '#5FB0F1' : 'tomato' }}>
-        community center
-      </Button>
+        <Button onClick={() => handleFilterClick('hiking')} className="filterButton" style={{ backgroundColor: filter === 'hiking' ? '#5FB0F1' : 'tomato' }}>
+          hiking
+        </Button>
 
-      <Button onClick={() => handleFilterClick('hiking')} className="filterButton" style={{ backgroundColor: filter === 'hiking' ? '#5FB0F1' : 'tomato' }}>
-        hiking
-      </Button>
+        <Button onClick={() => handleFilterClick('indoor')} className="filterButton" style={{ backgroundColor: filter === 'indoor' ? '#5FB0F1' : 'tomato' }}>
+          indoor
+        </Button>
 
-      <Button onClick={() => handleFilterClick('indoor')} className="filterButton" style={{ backgroundColor: filter === 'indoor' ? '#5FB0F1' : 'tomato' }}>
-        indoor
-      </Button>
+        <Button onClick={() => handleFilterClick('library')} className="filterButton" style={{ backgroundColor: filter === 'library' ? '#5FB0F1' : 'tomato' }}>
+          library
+        </Button>
 
-      <Button onClick={() => handleFilterClick('library')} className="filterButton" style={{ backgroundColor: filter === 'library' ? '#5FB0F1' : 'tomato' }}>
-        library
-      </Button>
+        <Button onClick={() => handleFilterClick('paved_trail')} className="filterButton" style={{ backgroundColor: filter === 'paved_trail' ? '#5FB0F1' : 'tomato' }}>
+          paved trail
+        </Button>
 
-      <Button onClick={() => handleFilterClick('paved_trail')} className="filterButton" style={{ backgroundColor: filter === 'paved_trail' ? '#5FB0F1' : 'tomato' }}>
-        paved trail
-      </Button>
+        <Button onClick={() => handleFilterClick('pavilion')} className="filterButton" style={{ backgroundColor: filter === 'pavilion' ? '#5FB0F1' : 'tomato' }}>
+          picnic pavilion
+        </Button>
 
-      <Button onClick={() => handleFilterClick('pavilion')} className="filterButton" style={{ backgroundColor: filter === 'pavilion' ? '#5FB0F1' : 'tomato' }}>
-        picnic pavilion
-      </Button>
+        <Button onClick={() => handleFilterClick('sandbox')} className="filterButton" style={{ backgroundColor: filter === 'sandbox' ? '#5FB0F1' : 'tomato' }}>
+          sandbox
+        </Button>
 
-      <Button onClick={() => handleFilterClick('sandbox')} className="filterButton" style={{ backgroundColor: filter === 'sandbox' ? '#5FB0F1' : 'tomato' }}>
-        sandbox
-      </Button>
-
-      <Button onClick={() => handleFilterClick('water')} className="filterButton" style={{ backgroundColor: filter === 'water' ? '#5FB0F1' : 'tomato' }}>
-        water play
-      </Button>
+        <Button onClick={() => handleFilterClick('water')} className="filterButton" style={{ backgroundColor: filter === 'water' ? '#5FB0F1' : 'tomato' }}>
+          water play
+        </Button>
+      </div>
     </>
   );
 }
