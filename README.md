@@ -14,7 +14,7 @@ see.saw is a web app designed to simplify and streamline playground discovery so
 * Users can browse Nashville's neighborhoods and view a list of playgrounds within a given area. Explore the hidden gems in your own neighborhood!
 * New neighborhoods can be created to encompass new cities or other pockets of town if desired.
 
-  ***Play Map***
+***Play Map***
 * View the locations of every playground on one big, interactive Google Map to get a sense of where playgrounds are relative to your location.
 * When a new playground is created, the play map is automatically updated with a marker for the new location.
 * When a map marker is clicked, a modal displays the playground's address.
