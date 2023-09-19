@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { signIn } from '../utils/auth';
 
 function Signin() {
@@ -10,13 +10,20 @@ function Signin() {
         height: '90vh',
         padding: '30px',
         maxWidth: '400px',
-        margin: '0 auto',
+        marginRight: 'auto',
+        marginLeft: '25%',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
-        Sign In
+      <Image
+        src="https://firebasestorage.googleapis.com/v0/b/seesaw-970b6.appspot.com/o/images%2Fsee.saw_large.gif?alt=media&token=54e6de6d-2269-4ecc-899a-fc2da4a71d64"
+        style={{
+          width: '100vh',
+          alignSelf: 'center',
+          marginBottom: '0',
+        }}
+      />
+      <Button type="button" size="lg" className="copy-btn" onClick={signIn} style={{ backgroundColor: 'tomato', border: 'none', padding: '23px' }}>
+        let&apos;s play!
       </Button>
     </div>
   );
