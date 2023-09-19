@@ -4,15 +4,12 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
+import firebase from 'firebase/app';
+import 'firebase/storage';
 import { useAuth } from '../utils/context/authContext';
 import { getNeighborhoods } from '../api/neighborhoodData';
-import {
-  createPlayground,
-  updatePlayground,
-  // addFavoritePlayground,
-  // removeFavoritePlayground,
-} from '../api/playgroundData';
+import { createPlayground, updatePlayground } from '../api/playgroundData';
 
 const initialState = {
   name: '',
@@ -39,9 +36,17 @@ const initialState = {
 function PlaygroundForm({ playgroundObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [neighborhoods, setNeighborhoods] = useState([]);
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [imageUpload, setImageUpload] = useState(null);
+
   const router = useRouter();
   const { user } = useAuth();
+
+  const storage = firebase.storage();
+  const storageRef = storage.ref();
+
+  useEffect(() => {
+    console.warn('imageUpload state:', imageUpload);
+  }, [imageUpload]);
 
   useEffect(() => {
     getNeighborhoods(user.uid).then(setNeighborhoods);
@@ -52,86 +57,68 @@ function PlaygroundForm({ playgroundObj }) {
       } else {
         setFormInput((prevState) => ({
           ...playgroundObj,
-          // visited: false,
-          // favorite: false,
           uid: prevState.uid,
         }));
       }
     }
   }, [playgroundObj, user]);
 
-  // useEffect(() => {
-  //   setIsFavorite(playgroundObj.favoritedBy ? playgroundObj.favoritedBy.includes(user.uid) : false);
-  // }, [playgroundObj.favoritedBy, user.uid]);
-
-  // const toggleFavorite = () => {
-  //   console.warn('Before toggle:', isFavorite);
-  //   if (isFavorite) {
-  //     removeFavoritePlayground(playgroundObj.firebaseKey, user.uid)
-  //       .then(() => setIsFavorite(false))
-  //       .catch((error) => console.error('Error removing favorite:', error));
-  //   } else {
-  //     addFavoritePlayground(playgroundObj.firebaseKey, user.uid)
-  //       .then(() => setIsFavorite(true))
-  //       .catch((error) => console.error('Error adding favorite:', error));
-  //   }
-  // };
-
-  // const toggleFavorite = () => {
-  //   if (isFavorite) {
-  //     removeFavoritePlayground(playgroundObj.firebaseKey, user.uid)
-  //       .then(() => {
-  //         setIsFavorite(false);
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error removing favorite:', error);
-  //       });
-  //   } else {
-  //     addFavoritePlayground(playgroundObj.firebaseKey, user.uid)
-  //       .then(() => {
-  //         setIsFavorite(true);
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error adding favorite:', error);
-  //       });
-  //   }
-  // };
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+    const { name, value, type } = e.target;
 
-  // const updateUidArray = (array, uid, shouldAdd) => {
-  //   const newArray = array || [];
-  //   if (shouldAdd) {
-  //     if (!newArray.includes(uid)) {
-  //       newArray.push(uid);
-  //     }
-  //   } else {
-  //     const index = newArray.indexOf(uid);
-  //     if (index > -1) {
-  //       newArray.splice(index, 1);
-  //     }
-  //   }
-  //   return newArray;
-  // };
+    if (type === 'file') {
+      const file = e.target.files[0];
+      console.warn('selected file:', file);
+      if (file) { // checks if a file is selected\
+        setFormInput((prevState) => ({
+          ...prevState,
+          image: file,
+        }));
+
+        const fileRef = storageRef.child(`images/${file.name}`);
+        const uploadTask = fileRef.put(file);
+
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.warn(`Upload is ${progress}% done`); // Debugging step 2
+          },
+          (error) => {
+            console.warn(error);
+          },
+          () => {
+            fileRef.getDownloadURL().then((url) => {
+              console.warn('download url:', url);
+              setImageUpload(url);
+              setFormInput((prevState) => ({
+                ...prevState,
+                image: url,
+              }));
+              console.warn('imageUpload state after setting:', imageUpload, url);
+            }).catch((error) => {
+              console.warn('failed to get download url:', error);
+            });
+          },
+        );
+      }
+    } else {
+      setFormInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedFormInput = { ...formInput };
+    const updatedFormInput = {
+      ...formInput,
+      image: imageUpload,
+    };
 
     if (playgroundObj.firebaseKey) {
-      // if ('favoritedBy' in playgroundObj) {
-      //   // Update favoritedBy and visitedBy arrays
-      //   updatedFormInput.favorite = toggleFavorite(playgroundObj.favorite, user.uid, formInput.favorite);
-      //   // updatedFormInput.visitedBy = updateUidArray(playgroundObj.visitedBy, user.uid, formInput.visited);
-      // }
-
       // Update the playground object
       await updatePlayground(updatedFormInput).then(() => router.push(`/playground/${playgroundObj.firebaseKey}`));
     } else {
@@ -139,8 +126,6 @@ function PlaygroundForm({ playgroundObj }) {
       const payload = {
         ...formInput,
         uid: user.uid,
-        // favoritedBy: formInput.favorite ? [user.uid] : [],
-        // visitedBy: formInput.visited ? [user.uid] : [],
       };
       createPlayground(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
@@ -151,9 +136,13 @@ function PlaygroundForm({ playgroundObj }) {
     }
   };
 
+  // const uploadImage = () => {
+  //   if (imageUpload == null) return;
+  // };
+
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{playgroundObj.firebaseKey ? 'update' : 'create'} playground</h2>
+      <h2 className="formTitle">{playgroundObj.firebaseKey ? 'update' : 'create'} a playground</h2>
       <hr />
 
       {/* NAME INPUT  */}
@@ -169,16 +158,24 @@ function PlaygroundForm({ playgroundObj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput2" label="playground image url" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="playground image" className="mb-3">
         <Form.Control
-          type="url"
+          type="file"
           placeholder="upload an image"
           name="image"
-          value={formInput.image}
+          accept="image/*"
           onChange={handleChange}
           required
         />
+        {/* <Button
+          onClick={uploadImage}
+          onChange={(e) => {
+            setImageUpload(e.target.files[0]);
+          }}
+        >upload
+        </Button> */}
       </FloatingLabel>
+      {imageUpload && <Image src={imageUpload} alt="preview" width="200" />}
 
       {/* STREET ADDRESS INPUT  */}
       <FloatingLabel controlId="floatingInput3" label="street address" className="mb-3">
@@ -268,156 +265,133 @@ function PlaygroundForm({ playgroundObj }) {
       <br />
 
       {/* FEATURES CHECKBOXES */}
-      <h5 id="featuresTitle">FEATURES</h5>
-      <div id="checkboxGroup">
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="paved_trail"
-          name="paved_trail"
-          label="paved trail"
-          checked={formInput.paved_trail}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              paved_trail: e.target.checked,
-            }));
-          }}
-        />
+      <div id="featuresContainer">
+        <h5 id="featuresTitle">FEATURES</h5>
+        <hr />
+        <div id="checkboxGroup">
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="paved_trail"
+            name="paved_trail"
+            label="paved trail"
+            checked={formInput.paved_trail}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                paved_trail: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="hiking"
-          name="hiking"
-          label="hiking"
-          checked={formInput.hiking}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              hiking: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="hiking"
+            name="hiking"
+            label="hiking"
+            checked={formInput.hiking}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                hiking: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="pavilion"
-          name="pavilion"
-          label="picnic pavilion"
-          checked={formInput.pavilion}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              pavilion: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="pavilion"
+            name="pavilion"
+            label="picnic pavilion"
+            checked={formInput.pavilion}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                pavilion: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="water"
-          name="water"
-          label="water play"
-          checked={formInput.water}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              water: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="water"
+            name="water"
+            label="water play"
+            checked={formInput.water}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                water: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="sandbox"
-          name="sandbox"
-          label="sandbox"
-          checked={formInput.sandbox}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              sandbox: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="sandbox"
+            name="sandbox"
+            label="sandbox"
+            checked={formInput.sandbox}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                sandbox: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="library"
-          name="library"
-          label="next to a library"
-          checked={formInput.library}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              library: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="library"
+            name="library"
+            label="next to a library"
+            checked={formInput.library}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                library: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="comm_center"
-          name="comm_center"
-          label="next to a community center"
-          checked={formInput.comm_center}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              comm_center: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="comm_center"
+            name="comm_center"
+            label="next to a community center"
+            checked={formInput.comm_center}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                comm_center: e.target.checked,
+              }));
+            }}
+          />
 
-        <Form.Check
-          className="text-white mb-3"
-          type="checkbox"
-          id="indoor"
-          name="indoor"
-          label="indoor"
-          checked={formInput.indoor}
-          onChange={(e) => {
-            setFormInput((prevState) => ({
-              ...prevState,
-              indoor: e.target.checked,
-            }));
-          }}
-        />
+          <Form.Check
+            className="text-white mb-3"
+            type="checkbox"
+            id="indoor"
+            name="indoor"
+            label="indoor"
+            checked={formInput.indoor}
+            onChange={(e) => {
+              setFormInput((prevState) => ({
+                ...prevState,
+                indoor: e.target.checked,
+              }));
+            }}
+          />
+        </div>
       </div>
 
       <br />
-
-      {/* VISITED + FAVORITE TOGGLES
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="visited"
-        name="visited"
-        label="Visited?"
-        checked={formInput.visited}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            visited: e.target.checked,
-          }));
-        }}
-      /> */}
-      {/*
-            <Form.Check
-              className="text-white mb-3"
-              type="switch"
-              id="favorited"
-              name="favorite"
-              label="Favorite?"
-              checked={isFavorite}
-              onChange={toggleFavorite}
-            /> */}
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit" className="submitBtn">{playgroundObj.firebaseKey ? 'update' : 'create'} playground</Button>
