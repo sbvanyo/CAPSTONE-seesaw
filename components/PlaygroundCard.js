@@ -14,10 +14,15 @@ import {
 
 function PlaygroundCard({ playgroundObj }) {
   const { user } = useAuth();
-  // Set state to manage whether heart is filled in or not
+  // Initialize state for favorite and visited with initial state of false
   const [isFavorite, setIsFavorite] = useState(false);
   const [hasVisited, setHasVisited] = useState(false);
 
+  // useEffect(() => {
+  //   console.warn('Image URL:', playgroundObj.image);
+  // }, [playgroundObj.image]);
+
+  // If playgroundObj.favoritedBy exists, check if the array include's the active user's uid and set 'isFavorite' acccordingly. Re-runs anytime playgroundObj.favoritedBy or user.uid changes.
   useEffect(() => {
     if (playgroundObj.favoritedBy) {
       setIsFavorite(playgroundObj.favoritedBy.includes(user.uid));
@@ -30,6 +35,7 @@ function PlaygroundCard({ playgroundObj }) {
     }
   }, [playgroundObj.visitedBy, user.uid]);
 
+  // Toggles favorite on and off. Depending on current status of 'isFavorite', either calls removeFavoritePlayground or addFavoritePlayground (Promises that interact with Firebase to remove or add user's uid from favoritedBy array)
   const toggleFavorite = () => {
     if (isFavorite) {
       removeFavoritePlayground(playgroundObj.firebaseKey, user.uid)
@@ -89,6 +95,7 @@ function PlaygroundCard({ playgroundObj }) {
             toggleFavorite();
           }
         }}
+        // improves acessibility by indicating the pressed state
         aria-pressed={isFavorite ? 'true' : 'false'}
       />
 

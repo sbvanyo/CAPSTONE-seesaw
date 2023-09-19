@@ -20,6 +20,8 @@ import { useAuth } from '../../utils/context/authContext';
 
 export default function ViewPlayground({ onUpdate }) {
   const [playgroundDetails, setPlaygroundDetails] = useState({});
+  // const [playgroundImages, setPlaygroundImages] = useState([]);
+
   const router = useRouter();
   const { user } = useAuth();
   // grab firebaseKey from url
@@ -29,6 +31,10 @@ export default function ViewPlayground({ onUpdate }) {
   useEffect(() => {
     viewPlaygroundDetails(firebaseKey).then(setPlaygroundDetails);
   }, [firebaseKey]);
+
+  // useEffect(() => {
+  //   getPlaygroundImages(firebaseKey).then(setPlaygroundImages);
+  // }, [firebaseKey]);
 
   const deleteThisPlayground = () => {
     if (window.confirm(`Delete ${playgroundDetails.name}?`)) {
@@ -160,6 +166,11 @@ export default function ViewPlayground({ onUpdate }) {
                 </li>
               </ul>
             </div>
+            {/* <div id="playgroundImages">
+              {playgroundImages.map((image) => (
+
+              ))}
+            </div> */}
           </div>
           <p><strong>HOT TIP:</strong> {playgroundDetails.hot_tip}</p>
           <hr />

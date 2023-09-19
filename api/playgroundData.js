@@ -101,14 +101,18 @@ const favoritePlaygrounds = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// Fetches data about a specific playground from Firebase, and updates that playground's 'favoritedBy' array to include current user if not already included
 const addFavoritePlayground = (firebaseKey, uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/playgrounds/${firebaseKey}.json`)
     .then((response) => response.json())
+    // Processes the data fetched from the server: favoritedBy variable takes on value of returned data, defaulting to empty array if nothing is returned.
     .then((data) => {
       const favoritedBy = data.favoritedBy || [];
+      // Checks if active user's uid is already in favoritedBy array, and if it's not, adds it.
       if (!favoritedBy.includes(uid)) {
         favoritedBy.push(uid);
       }
+      // Anoter fetch request to update the favoritedBy array with the new list including user's uid
       return fetch(`${endpoint}/playgrounds/${firebaseKey}.json`, {
         method: 'PATCH',
         body: JSON.stringify({ favoritedBy }),
@@ -226,6 +230,18 @@ const filterPlaygrounds = (filterType) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getPlaygroundImages = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/images.json?orderBy="playground_id"&equalTo="${firebaseKey}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   getPlaygrounds,
   createPlayground,
@@ -240,4 +256,5 @@ export {
   removeFavoritePlayground,
   addVisitedPlayground,
   removeVisitedPlayground,
+  getPlaygroundImages,
 };

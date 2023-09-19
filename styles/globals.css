@@ -86,6 +86,12 @@ nav {
   font-size: 10vh;
   text-align: center;
 }
+.formTitle {
+  font-size: 5vh;
+  text-align: center;
+  font-family: 'Borel', cursive;
+  margin-top: 25px;
+}
 .cardTitle {
   font-weight: 700;
   font-size: 23px;
@@ -93,6 +99,9 @@ nav {
 .detailsTitle {
   font-weight: bold;
   /* padding: 15px; */
+}
+#featuresTitle {
+  /* font-family: 'Borel', cursive; */
 }
 
 #visitedTotal {
@@ -138,7 +147,6 @@ button {
   margin-bottom: 30px;
   text-align: center;
   padding-top: 20%;
-  /* padding-bottom: auto; */
 }
 #addNeighborhoodBtn {
   background-color: #5FB0F1;
@@ -302,7 +310,12 @@ form {
   margin-right: 15px;
 }
 #featuresTitle {
-  font-weight: 500;
+  font-weight: 600;
+}
+#featuresContainer {
+  background-color: #5FB0F1;
+  border-radius: 25px;
+  padding: 20px;
 }
 
 
