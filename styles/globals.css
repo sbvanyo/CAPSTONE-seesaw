@@ -145,8 +145,16 @@ button {
   height: 140px;
   width: 140px;
   margin-bottom: 30px;
+  margin-top: 0;
   text-align: center;
   padding-top: 20%;
+
+  &:hover {
+    background-color: #388ed4;
+  }
+  &:active {
+    background-color: #217bc5;
+  }
 }
 #addNeighborhoodBtn {
   background-color: #5FB0F1;
@@ -211,7 +219,7 @@ button {
     z-index: -1;
     top: -16px;
     right: -16px;
-    background: #00838d;
+    /* background: #00838d; */
     height: 32px;
     width: 32px;
     border-radius: 32px;
@@ -328,7 +336,7 @@ form {
   margin: 1rem 5rem 5rem 0;
 }
 .full-map-container {
-  width: 100%;
+  width: 98%;
   height: 100vh;
   border: white 8px solid;
   border-radius: 25px;
@@ -343,7 +351,7 @@ form {
   padding: 20px;
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 25px;
   width: 300px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   transition: 1s ease; 

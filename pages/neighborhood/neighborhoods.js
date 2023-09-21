@@ -25,15 +25,15 @@ function Neighborhoods() {
   return (
     <div id="neighborhoodContainer">
       <h1 className="title">neighborhoods</h1>
-      <Link passHref href="/neighborhood/new">
-        <Button id="addNeighborhoodBtn">add a neighborhood</Button>
-      </Link>
       <div id="neighborhoodCardList">
         {/* map over neighborhoods here using NeighborhoodCard component */}
         {neighborhoods.map((neighborhood) => (
           <NeighborhoodCard key={neighborhood.firebaseKey} neighborhoodObj={neighborhood} onUpdate={getAllTheNeighborhoods} />
         ))}
       </div>
+      <Link passHref href="/neighborhood/new">
+        <Button id="addNeighborhoodBtn">add a neighborhood</Button>
+      </Link>
     </div>
   );
 }
