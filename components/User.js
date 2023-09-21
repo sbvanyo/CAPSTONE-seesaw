@@ -13,7 +13,17 @@ function User({ userObj }) {
   return (
     <>
       <Card id="userCard">
-        <Card.Img variant="top" src={user.photoURL} alt={user.displayName} style={{ height: 'auto' }} />
+        <Card.Img
+          variant="top"
+          src={user.photoURL}
+          alt={user.displayName}
+          style={{
+            width: '75%',
+            borderRadius: '50%',
+            alignSelf: 'center',
+            margin: '15px',
+          }}
+        />
         <Card.Body>
           <Card.Title>{user.displayName}</Card.Title>
           <Card.Text>email: {user.email}</Card.Text>
