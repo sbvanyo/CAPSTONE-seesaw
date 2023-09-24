@@ -100,9 +100,6 @@ nav {
   font-weight: bold;
   /* padding: 15px; */
 }
-#featuresTitle {
-  /* font-family: 'Borel', cursive; */
-}
 
 #visitedTotal {
   margin: 10%;
@@ -435,4 +432,8 @@ form {
   color: rgb(74, 194, 122);
   background-color: white;
   border-radius: 10px;
+}
+
+#_next {
+  background-color: #FFCD29;
 }
