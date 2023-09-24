@@ -12,6 +12,7 @@ function Signin() {
         maxWidth: '400px',
         marginRight: 'auto',
         marginLeft: '25%',
+        backgroundColor: '#FFCD29',
       }}
     >
       <Image

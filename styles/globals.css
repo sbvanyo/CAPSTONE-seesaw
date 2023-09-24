@@ -5,11 +5,11 @@
 html,
 body {
   padding-top: 10px;
-  /* margin: 0; */
-  margin-left: 10rem;
-  font-family: 'Quicksand', sans-serif;
-  color: rgb(36, 36, 36);
-  background-color: #FFCD29;
+  margin-left: 10rem !important;
+  font-family: 'Quicksand', sans-serif !important;
+  color: rgb(36, 36, 36) !important;
+  background-color: #FFCD29 !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 a {
@@ -432,8 +432,4 @@ form {
   color: rgb(74, 194, 122);
   background-color: white;
   border-radius: 10px;
-}
-
-#_next {
-  background-color: #FFCD29;
 }
