@@ -68,7 +68,6 @@ function PlaygroundForm({ playgroundObj }) {
 
     if (type === 'file') {
       const file = e.target.files[0];
-      console.warn('selected file:', file);
       if (file) { // checks if a file is selected\
         setFormInput((prevState) => ({
           ...prevState,
@@ -89,7 +88,6 @@ function PlaygroundForm({ playgroundObj }) {
           },
           () => {
             fileRef.getDownloadURL().then((url) => {
-              console.warn('download url:', url);
               setImageUpload(url);
               setFormInput((prevState) => ({
                 ...prevState,
@@ -97,7 +95,7 @@ function PlaygroundForm({ playgroundObj }) {
               }));
               console.warn('imageUpload state after setting:', imageUpload, url);
             }).catch((error) => {
-              console.warn('failed to get download url:', error);
+              console.error('failed to get download url:', error);
             });
           },
         );
@@ -136,10 +134,6 @@ function PlaygroundForm({ playgroundObj }) {
     }
   };
 
-  // const uploadImage = () => {
-  //   if (imageUpload == null) return;
-  // };
-
   return (
     <Form onSubmit={handleSubmit}>
       <h2 className="formTitle">{playgroundObj.firebaseKey ? 'update' : 'create'} a playground</h2>
@@ -167,13 +161,6 @@ function PlaygroundForm({ playgroundObj }) {
           onChange={handleChange}
           required
         />
-        {/* <Button
-          onClick={uploadImage}
-          onChange={(e) => {
-            setImageUpload(e.target.files[0]);
-          }}
-        >upload
-        </Button> */}
       </FloatingLabel>
       {imageUpload && <Image src={imageUpload} alt="preview" width="200" />}
 
