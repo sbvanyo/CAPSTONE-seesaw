@@ -4,7 +4,6 @@ import { getSinglePlayground, deletePlayground } from './playgroundData';
 const viewPlaygroundDetails = (playgroundFirebaseKey) => new Promise((resolve, reject) => {
   getSinglePlayground(playgroundFirebaseKey)
     .then((playgroundObject) => {
-      // console.warn(playgroundObject);
       getSingleNeighborhood(playgroundObject.neighborhood_id)
         .then((neighborhoodObject) => {
           resolve({ neighborhoodObject, ...playgroundObject });
@@ -21,7 +20,6 @@ const viewNeighborhoodDetails = (neighborhoodFirebaseKey) => new Promise((resolv
 
 const deleteNeighborhoodPlaygrounds = (neighborhoodId) => new Promise((resolve, reject) => {
   getNeighborhoodPlaygrounds(neighborhoodId).then((playgroundsArray) => {
-    // console.warn(playgroundsArray, 'Neighborhood Playgrounds');
     const deletePlaygroundPromises = playgroundsArray.map((playground) => deletePlayground(playground.firebaseKey));
 
     Promise.all(deletePlaygroundPromises).then(() => {

@@ -185,36 +185,6 @@ const removeVisitedPlayground = (firebaseKey, uid) => new Promise((resolve, reje
     .catch(reject);
 });
 
-// const favoritePlaygrounds = (uid) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const favorites = Object.values(data).filter((item) => item.favorite);
-//       resolve(favorites);
-//     })
-//     .catch(reject);
-// });
-
-// const visitedPlaygrounds = (uid) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/playgrounds.json?orderBy="uid"&equalTo="${uid}"`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const visited = Object.values(data).filter((item) => item.visited);
-//       resolve(visited);
-//     })
-//     .catch(reject);
-// });
-
 const filterPlaygrounds = (filterType) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/playgrounds.json`, {
     method: 'GET',

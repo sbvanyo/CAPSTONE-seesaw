@@ -1,9 +1,6 @@
 import {
   GoogleMap,
   Marker,
-  // DirectionsRenderer,
-  // Circle,
-  // MarkerClusterer,
 } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
@@ -25,11 +22,10 @@ function FullMap({ playgrounds }) {
         .then((coords) => {
           if (coords) {
             coordsArray.push({ ...coords, ...playground });
-            // console.warn(markerAddress);
           }
         })
         .catch((error) => {
-          console.warn(`An error occurred: ${error}`);
+          console.error(`An error occurred: ${error}`);
         });
     });
     // When all Promises in 'promiseArray' are resolved (or rejected), 'Promise.all' resolves with the array of fulfilled Promises and sets the state of 'allCoordinates' with the coordsArray. Reruns anytime 'playgrounds' array changes (dependency array).
@@ -38,7 +34,7 @@ function FullMap({ playgrounds }) {
         setAllCoordinates(coordsArray);
       })
       .catch((error) => {
-        console.warn(`An error occurred while fetching all coordinates: ${error}`);
+        console.error(`An error occurred while fetching all coordinates: ${error}`);
       });
   }, [playgrounds]);
 

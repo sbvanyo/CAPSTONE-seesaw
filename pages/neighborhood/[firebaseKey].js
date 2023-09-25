@@ -30,13 +30,11 @@ export default function ViewNeighborhood() {
       </div>
       <div className="text-white ms-5 details">
         <h1 className="detailsTitle" style={{ textAlign: 'center', fontSize: 70, color: 'black' }}>{neighborhoodDetails.name}</h1>
-        {/* <h5>{neighborhoodDetails.favorite ? ' 💛 i love this neighborhood' : ''}</h5> */}
       </div>
       <hr />
       <div>
         <h3 style={{ padding: 20 }}>playgrounds in this neighborhood:</h3>
         <div id="neighborhoodPlaygrounds">
-          {/* map over playgrounds here using PlaygroundCard component */}
           {neighborhoodPlaygrounds.map((playground) => (
             <PlaygroundCard key={playground.firebaseKey} playgroundObj={playground} onUpdate={getNeighborhoodPlaygrounds} />
           ))}
