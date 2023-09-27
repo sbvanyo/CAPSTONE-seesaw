@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { updateNeighborhood, createNeighborhood } from '../api/neighborhoodData';
-// import { createBook, updateBook } from '../../api/bookData';
 
 const initialState = {
   name: '',
@@ -16,7 +15,6 @@ const initialState = {
 
 function NeighborhoodForm({ neighborhoodObj }) {
   const [formInput, setFormInput] = useState(initialState);
-  // const [authors, setAuthors] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -75,22 +73,6 @@ function NeighborhoodForm({ neighborhoodObj }) {
           required
         />
       </FloatingLabel>
-
-      {/* FAVORITE TOGGLE
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="favorite"
-        name="favorite"
-        label="Favorite?"
-        checked={formInput.favorite}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            favorite: e.target.checked,
-          }));
-        }}
-      /> */}
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit" className="submitBtn">{neighborhoodObj.firebaseKey ? 'update' : 'create'} neighborhood</Button>

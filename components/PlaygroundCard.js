@@ -18,10 +18,6 @@ function PlaygroundCard({ playgroundObj }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [hasVisited, setHasVisited] = useState(false);
 
-  // useEffect(() => {
-  //   console.warn('Image URL:', playgroundObj.image);
-  // }, [playgroundObj.image]);
-
   // If playgroundObj.favoritedBy exists, check if the array include's the active user's uid and set 'isFavorite' acccordingly. Re-runs anytime playgroundObj.favoritedBy or user.uid changes.
   useEffect(() => {
     if (playgroundObj.favoritedBy) {
@@ -112,16 +108,6 @@ function PlaygroundCard({ playgroundObj }) {
 
       <Card.Body>
         <Card.Title className="cardTitle">{playgroundObj.name}</Card.Title>
-
-        {/* <p>
-          {playgroundObj.visitedBy.includes(user.uid) ? ' ✅ i\'ve been here! ' : ''}
-          {playgroundObj.favoritedBy.includes(user.uid) ? '💛 i love this playground' : ''}
-        </p> */}
-
-        {/* DYNAMIC LINK TO VIEW THE playground DETAILS
-        <Link href={`/playground/${playgroundObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2" id="viewBtn">VIEW</Button>
-        </Link> */}
       </Card.Body>
     </Card>
   );

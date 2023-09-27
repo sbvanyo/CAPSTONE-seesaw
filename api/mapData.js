@@ -25,7 +25,7 @@ function getLatLngFromAddress(address) {
       return Promise.reject(new Error(`Geocoding error: ${data.status}`));
     })
     .catch((error) => {
-      console.warn(`An error occurred: ${error}`);
+      console.error(`An error occurred: ${error}`);
       return null;
     });
 }

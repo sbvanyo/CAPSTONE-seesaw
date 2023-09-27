@@ -1,12 +1,10 @@
 import { React, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-// import { useAuth } from '../utils/context/authContext';
 import { filterPlaygrounds } from '../api/playgroundData';
 
 // Filter() takes 2 props, defined in index.html, giving this function access to use and manipulate those pieces
 function Filter({ setPlaygrounds, originalPlaygrounds }) {
-  // const { user } = useAuth();
   // initialize state for filter with initial value of null (no filter)
   const [filter, setFilter] = useState(null);
 

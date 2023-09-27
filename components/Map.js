@@ -21,11 +21,10 @@ function Map({ playground }) {
       .then((coords) => {
         if (coords) {
           setCoordinates(coords);
-          console.warn(`Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}`);
         }
       })
       .catch((error) => {
-        console.warn(`An error occurred: ${error}`);
+        console.error(`An error occurred: ${error}`);
       });
   }, [markerAddress]);
 

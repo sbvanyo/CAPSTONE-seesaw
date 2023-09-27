@@ -58,7 +58,6 @@ export default function ViewPlayground({ onUpdate }) {
       <div className="playgroundDetails">
         <div>
           <div id="playgroundDetailsTop">
-            <img src={playgroundDetails.image} alt={playgroundDetails.name} className="playgroundImageDetails" />
             <div id="playgroundDetailsHeader">
               <h1 className="detailsTitle">{playgroundDetails.name}</h1>
               <h5>Neighborhood: {playgroundDetails.neighborhoodObject?.name}</h5>
@@ -166,11 +165,7 @@ export default function ViewPlayground({ onUpdate }) {
                 </li>
               </ul>
             </div>
-            {/* <div id="playgroundImages">
-              {playgroundImages.map((image) => (
-
-              ))}
-            </div> */}
+            <img src={playgroundDetails.image} alt={playgroundDetails.name} className="playgroundImageDetails" />
           </div>
           <p><strong>HOT TIP:</strong> {playgroundDetails.hot_tip}</p>
           <hr />

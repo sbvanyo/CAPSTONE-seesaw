@@ -58,9 +58,9 @@ nav {
   align-items: center;
 }
 .nav-link {
-  font-weight: bold;
-  font-size: x-large;
-  padding-top: 25px;
+  font-weight: bold !important;
+  font-size: x-large !important;
+  padding-top: 25px !important;
 }
 
 
@@ -93,12 +93,11 @@ nav {
   margin-top: 25px;
 }
 .cardTitle {
-  font-weight: 700;
-  font-size: 23px;
+  font-weight: 700 !important;
+  font-size: 130% !important;
 }
 .detailsTitle {
   font-weight: bold;
-  /* padding: 15px; */
 }
 
 #visitedTotal {
@@ -122,16 +121,16 @@ button {
 }
 .filterButton {
   background-color: tomato;
-  border: white 2px solid;
-  border-radius: 50%;
-  width: 110px;
-  height: 110px;
+  border: white 2px solid !important;
+  border-radius: 50% !important;
+  width: 110px !important;
+  height: 110px !important;
   margin: 1vh;
   transition: .5s ease; 
   font-size: 95%;
 }
 #viewBtn {
-  background-color: #5FB0F1;
+  background-color: #5FB0F1 !important;
   border: none;
 }
 #addPlaygroundBtn {
@@ -141,10 +140,10 @@ button {
   border: white 5px solid;
   height: 140px;
   width: 140px;
-  margin-bottom: 30px;
+  margin-bottom: 1vh;
   margin-top: 0;
   text-align: center;
-  padding-top: 20%;
+  padding-top: 20% !important;
 
   &:hover {
     background-color: #388ed4;
@@ -154,29 +153,37 @@ button {
   }
 }
 #addNeighborhoodBtn {
-  background-color: #5FB0F1;
+  background-color: #5FB0F1 !important;
   border: none;
   margin: 1vh;
 }
 .submitBtn {
-  background-color: #5FB0F1;
+  background-color: tomato !important;
   border: none;
   margin: 1vh 0 1vh 0;
+  width: 47%;
+  align-self: center;
+  padding: 10px;
+
+  &:hover {
+    background-color: rgb(198, 74, 52) !important;
+  }
 }
 .btn-info {
   width: 6rem;
-  background-color: #5FB0F1;
+  background-color: #5FB0F1 !important;
   border: none;
 }
 .btn-danger {
   width: 6rem;
-  background-color: black;
+  background-color: black !important;
   border: none;
 }
 #signOutBtn {
   position: fixed;
   bottom: 0;
   margin-bottom: 2vh;
+  margin-top: 2vh;
 }
 .detailBtnGroup {
   text-align: center;
@@ -195,12 +202,12 @@ button {
   flex-direction: row;
 }
 .playgroundCard {
-  border-radius: 25px;
-  break-inside: avoid;
-  margin-bottom: 16px;
-  border: 2px whitesmoke solid;
-  max-width: 25rem;
-  background-color: whitesmoke;
+  border-radius: 25px !important;
+  break-inside: avoid !important;
+  margin-bottom: 16px !important;
+  border: 2px whitesmoke solid !important;
+  max-width: 25rem !important;
+  background-color: whitesmoke !important;
 
   &:hover {
     transition: all 0.5s ease;
@@ -216,7 +223,6 @@ button {
     z-index: -1;
     top: -16px;
     right: -16px;
-    /* background: #00838d; */
     height: 32px;
     width: 32px;
     border-radius: 32px;
@@ -250,7 +256,6 @@ button {
   align-items: center;
 }
 #neighborhoodContainer {
-  /* margin-left: 5vh; */
   text-align: center;
   align-self: center;
 }
@@ -270,6 +275,7 @@ button {
   border: 5px whitesmoke solid;
   padding: 2px;
   max-width: 35rem;
+  width: 100%;
   align-self: center;
   cursor: pointer;
 }
@@ -278,8 +284,9 @@ button {
   border: 5px white solid;
   padding: 8px;
   max-width: 35rem;
+  width: 50%;
   align-self: center;
-  margin: 20px 10px;
+  margin: 5% 0 5% 5%;
 }
 .neighborhoodImage {
   border-radius: 25px;
@@ -305,6 +312,8 @@ form {
   width: 60vh;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
 }
 #checkboxGroup {
   display: flex;
@@ -328,13 +337,13 @@ form {
 .map-container {
   width: 100%;
   height: 70vh;
-  border: white 8px solid;
+  border: whitesmoke 8px solid;
   border-radius: 25px;
   margin: 1rem 5rem 5rem 0;
 }
 .full-map-container {
   width: 98%;
-  height: 100vh;
+  height: 90vh;
   border: white 8px solid;
   border-radius: 25px;
   margin: 1rem 5rem 5rem 0;
@@ -346,7 +355,7 @@ form {
   transform: translate(-50%, -50%);
   z-index: 1000;
   padding: 20px;
-  background-color: white;
+  background-color: whitesmoke;
   border: 1px solid #ccc;
   border-radius: 25px;
   width: 300px;

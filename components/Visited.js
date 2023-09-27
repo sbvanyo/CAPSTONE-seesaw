@@ -19,7 +19,6 @@ function Visited() {
   }, []);
 
   const visitedTotal = playgrounds.length;
-  // console.warn(visitedTotal);
 
   return (
     <div className="text-center my-4">
