@@ -1,5 +1,5 @@
 # see.saw 
-## [Click here to check out the app!]([url](https://seesawplaygrounds.netlify.app/))
+## [Click here to check out the app!]([url](https://seesawplaygrounds.netlify.app))
 
 ## Overview:
 see.saw is a web app designed to simplify and streamline playground discovery so that users can get out there and P L A Y. Users can explore, create, curate, filter, and search for playgrounds in the Nashville area--all in one playfully designed and easy-to-use application. 
