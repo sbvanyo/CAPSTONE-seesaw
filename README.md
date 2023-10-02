@@ -48,6 +48,9 @@ User Profile displaying visited total and favorites list:
 
 <hr>
 
+## [Click here for a video walkthrough](https://www.loom.com/share/9d9e3662e7734d99836b7ae7fc3a4b19?sid=392768df-83e9-417c-8381-f91e42d68cfc)
+
+
 **[Link to Figma wireframe](https://www.figma.com/file/R9VJnIVuSdVMj410NqbWL1/see.saw?type=design&node-id=0%3A1&mode=design&t=31vtHv72WHYrliwP-1)**
 
 **[Link to Entity Relationship Diagram](https://dbdiagram.io/d/see-saw-64dc079b02bd1c4a5ed470ab)**
